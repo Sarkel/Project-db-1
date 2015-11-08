@@ -1,5 +1,5 @@
 CREATE TABLE "Uzytkownik" (
-	"User_ID" serial NOT NULL,
+	"Uzytkownik_ID" serial NOT NULL,
 	"Hasło" TEXT NOT NULL,
 	"Nazwisko" TEXT(255) NOT NULL,
 	"Imie" TEXT(255) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE "Uzytkownik" (
 	"Adres" serial NOT NULL,
 	"Kontakt" serial NOT NULL,
 	"Pwd_Seed" TEXT NOT NULL,
-	CONSTRAINT Uzytkownik_pk PRIMARY KEY ("User_ID")
+	CONSTRAINT Uzytkownik_pk PRIMARY KEY ("Uzytkownik_ID")
 ) WITH (
   OIDS=FALSE
 );
@@ -83,6 +83,7 @@ CREATE TABLE "Wypozyczona_ksiazka" (
 CREATE TABLE "Wydawnictwo" (
 	"Wydawnictwo_ID" serial NOT NULL,
 	"Nazwa" TEXT(255) NOT NULL,
+	"Kraj_pochodzenia" TEXT(255) DEFAULT 'Polska',
 	CONSTRAINT Wydawnictwo_pk PRIMARY KEY ("Wydawnictwo_ID")
 ) WITH (
   OIDS=FALSE
@@ -146,6 +147,18 @@ CREATE TABLE "Rodzaj_powiazania" (
 
 
 
+CREATE TABLE "Komentarz" (
+	"Komentarz_ID" serial NOT NULL,
+	"Urzytkownik" serial NOT NULL,
+	"Ksiazka" serial NOT NULL,
+	"Tekst" TEXT(255) NOT NULL,
+	CONSTRAINT Komentarz_pk PRIMARY KEY ("Komentarz_ID")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
 ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk0" FOREIGN KEY (Avatar) REFERENCES Avatar(Avatar_ID);
 ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk1" FOREIGN KEY (Adres) REFERENCES Adres(Adres_ID);
 ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk2" FOREIGN KEY (Kontakt) REFERENCES Kontakt(Kontakt_ID);
@@ -155,9 +168,9 @@ ALTER TABLE "Ksiazka" ADD CONSTRAINT "Ksiazka_fk1" FOREIGN KEY (Wydawnictwo) REF
 
 
 
-ALTER TABLE "Nalezkosci" ADD CONSTRAINT "Nalezkosci_fk0" FOREIGN KEY (Uzytkownik) REFERENCES Uzytkownik(User_ID);
+ALTER TABLE "Nalezkosci" ADD CONSTRAINT "Nalezkosci_fk0" FOREIGN KEY (Uzytkownik) REFERENCES Uzytkownik(Uzytkownik_ID);
 
-ALTER TABLE "Wypozyczona_ksiazka" ADD CONSTRAINT "Wypozyczona_ksiazka_fk0" FOREIGN KEY (Uzytkownik) REFERENCES Uzytkownik(User_ID);
+ALTER TABLE "Wypozyczona_ksiazka" ADD CONSTRAINT "Wypozyczona_ksiazka_fk0" FOREIGN KEY (Uzytkownik) REFERENCES Uzytkownik(Uzytkownik_ID);
 ALTER TABLE "Wypozyczona_ksiazka" ADD CONSTRAINT "Wypozyczona_ksiazka_fk1" FOREIGN KEY (Ksiazka) REFERENCES Ksiazka(Ksiazka_ID);
 
 
@@ -169,4 +182,7 @@ ALTER TABLE "Ksiazka-Autor" ADD CONSTRAINT "Ksiazka-Autor_fk2" FOREIGN KEY (Rodz
 ALTER TABLE "Kontakt" ADD CONSTRAINT "Kontakt_fk0" FOREIGN KEY (Poczta) REFERENCES Poczta(Poczta_ID);
 
 
+
+ALTER TABLE "Komentarz" ADD CONSTRAINT "Komentarz_fk0" FOREIGN KEY (Urzytkownik) REFERENCES Uzytkownik(Uzytkownik_ID);
+ALTER TABLE "Komentarz" ADD CONSTRAINT "Komentarz_fk1" FOREIGN KEY (Ksiazka) REFERENCES Ksiazka(Ksiazka_ID);
 
