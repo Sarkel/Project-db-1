@@ -7,6 +7,7 @@ CREATE TABLE "Uzytkownik" (
 	"Adres" serial NOT NULL,
 	"Kontakt" serial NOT NULL,
 	"Pwd_Seed" TEXT NOT NULL,
+	"Typ" bigint NOT NULL,
 	CONSTRAINT Uzytkownik_pk PRIMARY KEY ("Uzytkownik_ID")
 ) WITH (
   OIDS=FALSE
@@ -152,7 +153,31 @@ CREATE TABLE "Komentarz" (
 	"Urzytkownik" serial NOT NULL,
 	"Ksiazka" serial NOT NULL,
 	"Tekst" TEXT(255) NOT NULL,
+	"Data" DATE NOT NULL,
 	CONSTRAINT Komentarz_pk PRIMARY KEY ("Komentarz_ID")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Wiadomość" (
+	"Wiadomość_ID" serial NOT NULL,
+	"Adresat" serial NOT NULL,
+	"Odbiorca" serial NOT NULL,
+	"Tekst" TEXT NOT NULL,
+	"Data" DATE NOT NULL,
+	CONSTRAINT Wiadomość_pk PRIMARY KEY ("Wiadomość_ID")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Rodzaj_użytkownika" (
+	"Rodzaj_użytkownika_ID" serial NOT NULL,
+	"Nazwa" serial NOT NULL,
+	CONSTRAINT Rodzaj_użytkownika_pk PRIMARY KEY ("Rodzaj_użytkownika_ID")
 ) WITH (
   OIDS=FALSE
 );
@@ -162,6 +187,7 @@ CREATE TABLE "Komentarz" (
 ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk0" FOREIGN KEY (Avatar) REFERENCES Avatar(Avatar_ID);
 ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk1" FOREIGN KEY (Adres) REFERENCES Adres(Adres_ID);
 ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk2" FOREIGN KEY (Kontakt) REFERENCES Kontakt(Kontakt_ID);
+ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk3" FOREIGN KEY (Typ) REFERENCES Rodzaj_użytkownika(Rodzaj_użytkownika_ID);
 
 ALTER TABLE "Ksiazka" ADD CONSTRAINT "Ksiazka_fk0" FOREIGN KEY (Avatar) REFERENCES Avatar(Avatar_ID);
 ALTER TABLE "Ksiazka" ADD CONSTRAINT "Ksiazka_fk1" FOREIGN KEY (Wydawnictwo) REFERENCES Wydawnictwo(Wydawnictwo_ID);
@@ -185,4 +211,8 @@ ALTER TABLE "Kontakt" ADD CONSTRAINT "Kontakt_fk0" FOREIGN KEY (Poczta) REFERENC
 
 ALTER TABLE "Komentarz" ADD CONSTRAINT "Komentarz_fk0" FOREIGN KEY (Urzytkownik) REFERENCES Uzytkownik(Uzytkownik_ID);
 ALTER TABLE "Komentarz" ADD CONSTRAINT "Komentarz_fk1" FOREIGN KEY (Ksiazka) REFERENCES Ksiazka(Ksiazka_ID);
+
+ALTER TABLE "Wiadomość" ADD CONSTRAINT "Wiadomość_fk0" FOREIGN KEY (Adresat) REFERENCES Uzytkownik(Uzytkownik_ID);
+ALTER TABLE "Wiadomość" ADD CONSTRAINT "Wiadomość_fk1" FOREIGN KEY (Odbiorca) REFERENCES Uzytkownik(Uzytkownik_ID);
+
 
