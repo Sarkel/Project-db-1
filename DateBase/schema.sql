@@ -7,7 +7,7 @@ CREATE TABLE "Uzytkownik" (
 	"Adres" serial NOT NULL,
 	"Kontakt" serial NOT NULL,
 	"Pwd_Seed" TEXT NOT NULL,
-	"Typ" bigint NOT NULL,
+	"Typ" serial NOT NULL,
 	CONSTRAINT Uzytkownik_pk PRIMARY KEY ("Uzytkownik_ID")
 ) WITH (
   OIDS=FALSE
