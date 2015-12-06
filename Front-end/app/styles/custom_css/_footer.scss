@@ -1,0 +1,32 @@
+@import "./variables/_padding_size.scss";
+@import "./mixins/_invert_filter.scss";
+@import "./mixins/_pointer_cursor.scss";
+
+.footer-main {
+	position: fixed;
+	bottom: 0px;
+	width: 100vw;
+	height: 5vw;
+	margin: auto;
+	padding-left: $paddingLR;
+    padding-right: $paddingLR;
+    background-color: rgb(255, 255, 255);
+    .facebook {
+    	@include pointer-cursor();
+    	:hover{
+    		color: #3b5998;
+    	}
+    }
+    .twitter {
+    	@include pointer-cursor();
+    	:hover {
+    		color: #4099FF;
+    	}
+    }
+    .google-plus{
+    	@include pointer-cursor();
+    	:hover {
+    		color: rgb(214, 45, 32);
+    	}
+    }
+}

@@ -1,0 +1,11 @@
+@import "./variables/_padding_size.scss";
+
+.main-view{
+	width: 100vw;
+	height: 50vw;
+	top: 6vw;
+	position: absolute;
+	padding-left: $paddingLR;
+    padding-right: $paddingLR;
+    background-color: rgb(255, 255, 255);
+}

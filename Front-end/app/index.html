@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.) styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/ng-img-crop/compile/minified/ng-img-crop.css" />
+        <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/app.css -->
+        <link rel="stylesheet" href="styles/app.css">
+        <!-- endbuild -->
+    </head>
+    <body ng-app="libraryApp">
+        <!--[if lte IE 8]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- Add your site or application content here -->
+        <!--navbar-->
+        <nav class="navbar navbar-default navbar-main">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">
+                        <a href="#/">
+                            <span>Brand</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="navbar-form navbar-left">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" ng-model="search"/>
+                        <span class="input-group-addon">
+                            <i class="fa fa-search fa-1x"></i>
+                        </span>
+                    </div> 
+                </div>
+                <div class="navbar-text navbar-left">
+                    <div>
+                        <i class="fa fa-phone small"></i>
+                        <span>44 444 444 444</span>
+                    </div>
+                    <div>
+                        <i class="fa fa-at"></i>
+                        <span>Napisz do nas</span>
+                    </div>
+                    <div>
+                        <i class="fa fa-map-pin"></i>
+                        <span>Gdzie nas znajdziesz</span>
+                    </div>
+                </div>
+                <div class="navbar-text navbar-right">
+                    <a href="#/koszyk">
+                        <i class="fa fa-shopping-basket fa-2x"></i>
+                        <span>Twój koszyk</span>
+                    </a>
+                </div>
+                <div class="navbar-text navbar-right">
+                    <a href="#/logowanie">
+                        <i class="fa fa-user fa-2x"></i>
+                        <span>Zaloguj się</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!--navbar-->
+
+        <!--main view-->
+        <main ng-view class="main-view"></main>
+        <!--main view-->
+
+        <!--footer-->
+        <footer class="navbar navbar-default footer-main">
+            <div class="navbar-form navbar-left">
+                <div class="input-group">
+                    <input type="email" class="form-control" placeholder="E-mail" />
+                    <span class="input-group-addon">
+                        <i class="fa fa-paper-plane"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div>
+                <div class="navbar-text navbar-right">
+                    <span class="fa-stack fa-lg google-plus">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="navbar-text navbar-right">
+                    <span class="fa-stack fa-lg twitter">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="navbar-text navbar-right">
+                    <span class="fa-stack fa-lg facebook">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+            </div>
+        </footer>
+        <!--footer-->
+
+        <!--cookies information block-->
+        <section class="cookies" ng-hide="cookiesConfirmed">
+            <i class="fa fa-lock"></i>
+            <span>Ta witryna korzysta z plików cookies w celu realizacji usług zgodnie z <a>polityką plików cookies</a>.</span>
+            <input type="button" class="btn btn-default cookies-confirm" value="OK, zamknij" ng-click="cookiesConfirmed = true"/>
+        </section>
+        <!--cookies information block-->
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+        <script>
+            'use strinct';
+            !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+            (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+            r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+            }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-XXXXX-X');
+            ga('send', 'pageview');
+        </script>
+        <!-- build:js(.) scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-aria/angular-aria.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-touch/angular-touch.js"></script>
+        <script src="bower_components/raven-js/dist/raven.js"></script>
+        <script src="bower_components/angular-raven/angular-raven.js"></script>
+        <script src="bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/respond/dest/respond.src.js"></script>
+        <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/json3/lib/json3.js"></script>
+        <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+        <script src="bower_components/ng-websocket/ng-websocket.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/mainpage.js"></script>
+        <script src="scripts/controllers/koszyk.js"></script>
+        <script src="scripts/controllers/logowanie.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>

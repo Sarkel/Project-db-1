@@ -1,0 +1,11 @@
+@import "./variables/_padding_size.scss";
+
+.navbar-main {
+	position: fixed;
+	width: 100vw;
+	height: 6vw;
+	padding-left: $paddingLR;
+	padding-right: $paddingLR;
+	z-index: 1000;
+	background-color: rgb(255, 255, 255);
+}
