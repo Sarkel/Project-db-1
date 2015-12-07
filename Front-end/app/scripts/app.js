@@ -39,6 +39,5 @@ angular
   })
   .controller('globalSettingsCtrl', ['$rootScope', function($rootScope){
     $rootScope.search = '';
-    $rootScope.isLogged = '';
     $rootScope.cookiesConfirmed = false;
   }]);

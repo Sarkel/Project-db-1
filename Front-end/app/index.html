@@ -62,7 +62,8 @@
                 <div class="navbar-text navbar-right">
                     <a href="#/logowanie">
                         <i class="fa fa-user fa-2x"></i>
-                        <span>Zaloguj się</span>
+                        <span ng-hide="isLogged">Zaloguj się</span>
+                        <span ng-show="isLogged" ng-bind="user.login"></span>
                     </a>
                 </div>
             </div>
@@ -87,20 +88,20 @@
             <div>
                 <div class="navbar-text navbar-right">
                     <span class="fa-stack fa-lg google-plus">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                        <!--<i class="fa fa-circle fa-stack-2x fa-inverse"></i>-->
+                        <i class="fa fa-google-plus fa-stack-1x"></i>
                     </span>
                 </div>
                 <div class="navbar-text navbar-right">
                     <span class="fa-stack fa-lg twitter">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        <!--<i class="fa fa-circle fa-stack-2x fa-inverse"></i>-->
+                        <i class="fa fa-twitter fa-stack-1x"></i>
                     </span>
                 </div>
                 <div class="navbar-text navbar-right">
                     <span class="fa-stack fa-lg facebook">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        <!--<i class="fa fa-circle fa-stack-2x fa-inverse"></i>-->
+                        <i class="fa fa-facebook fa-stack-1x"></i>
                     </span>
                 </div>
             </div>
