@@ -6,7 +6,6 @@ CREATE TABLE "Uzytkownik" (
 	"Imie" TEXT(255) NOT NULL,
 	"Avatar" int,
 	"Adres" int NOT NULL,
-	"Kontakt" serial NOT NULL,
 	"Pwd_Seed" TEXT NOT NULL,
 	"Typ" int NOT NULL,
 	"Telefon_komorkowy" TEXT(20),
@@ -178,8 +177,7 @@ CREATE TABLE "Rodzaj_uzytkownika" (
 
 ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk0" FOREIGN KEY (Avatar) REFERENCES Avatar(Avatar_ID);
 ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk1" FOREIGN KEY (Adres) REFERENCES Adres(Adres_ID);
-ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk2" FOREIGN KEY (Kontakt) REFERENCES Kontakt(Kontakt_ID);
-ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk3" FOREIGN KEY (Typ) REFERENCES Rodzaj_uzytkownika(Rodzaj_uzytkownika_ID);
+ALTER TABLE "Uzytkownik" ADD CONSTRAINT "Uzytkownik_fk2" FOREIGN KEY (Typ) REFERENCES Rodzaj_uzytkownika(Rodzaj_uzytkownika_ID);
 
 ALTER TABLE "Ksiazka" ADD CONSTRAINT "Ksiazka_fk0" FOREIGN KEY (Avatar) REFERENCES Avatar(Avatar_ID);
 ALTER TABLE "Ksiazka" ADD CONSTRAINT "Ksiazka_fk1" FOREIGN KEY (Wydawnictwo) REFERENCES Wydawnictwo(Wydawnictwo_ID);
