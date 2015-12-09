@@ -1,0 +1,17 @@
+.ngdialog-content {
+	width: 30% !important;
+	& > .ngdialog-close {
+		display: none;
+	}
+	.contact-dialog-inputs {
+		margin-bottom: 10px;
+	}
+	.contact-dialog-buttons {
+		.submit-button {
+			float: right;
+		}
+		.cancel-button{
+
+		}
+	}
+}

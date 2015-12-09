@@ -4,8 +4,11 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "components-font-awesome/scss/font-awesome.scss";
 // endbower
 
+//custom css
 @import "./custom_css/_cookies.scss";
 @import "./custom_css/_footer.scss";
 @import "./custom_css/_main.scss";
 @import "./custom_css/_nav.scss";
 @import "./custom_css/_logowanie.scss";
+@import "./custom_css/_contact_dialog.scss";
+//end custom css

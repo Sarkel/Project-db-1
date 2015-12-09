@@ -1,26 +1,32 @@
+//variables
 @import "./variables/_padding_size.scss";
+@import "./variables/_colors.scss";
+
+//mixins
 @import "./mixins/_border_radius.scss";
+
+
 .cookies {
     padding-left: $paddingLR;
     padding-right: $paddingLR;
     padding-top: $paddingTB;
     padding-bottom: $paddingTB;
     text-align: center;
-    border-top: solid 1px #d6dae3;
+    border-top: solid 1px $lightGreyWithBlue;
     width: 100%;
     z-index: 1000;
     position: fixed;
     bottom: 5vw;
-    background-color: rgb(255, 255, 255);
+    background-color: $white;
     height: 4vw;
     & > .cookies-confirm{
         @include border-radius(30px);
-        color: #4d4d4d;
-        background-color: #eee;
+        color: $grey;
+        background-color: $lightGrey;
         &:hover{
-            background-color: #4d4d4d;
-            color: rgb(255, 255, 255);
-            border-color: rgb(255, 255, 255);
+            background-color: $grey;
+            color: $white;
+            border-color: $white;
         }
     }
 }

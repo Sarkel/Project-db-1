@@ -1,0 +1,13 @@
+//variables
+@import "./variables/_colors.scss";
+
+@mixin social-media-button($brandColor) {
+	cursor: pointer;
+    border: solid 1px $brandColor;
+    background-color: $white;
+    color: $brandColor;
+    &:hover {
+        color: $white;
+        background-color: $brandColor;
+    }
+}

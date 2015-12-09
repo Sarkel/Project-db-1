@@ -1,14 +1,13 @@
-@import "./variables/_padding_size.scss";
+//mixins
 @import "./mixins/_invert_filter.scss";
-@import "./mixins/_pointer_cursor.scss";
 @import "./mixins/_border_radius.scss";
+@import "./mixins/_social_media_button.scss";
 
-$twitterColor: #4099FF;
-$facebookColor: #3b5998;
-$googlePlusColor: rgb(214, 45, 32);
-$white: rgb(255, 255, 255);
+//variables
+@import "./variables/_colors.scss";
+@import "./variables/_padding_size.scss";
+
 $radius: 40px;
-$border-size: 1px;
 
 .footer-main {
 	position: fixed;
@@ -21,36 +20,15 @@ $border-size: 1px;
     background-color: $white;
     z-index: 1000;
     .facebook {
-    	@include pointer-cursor();
         @include border-radius($radius);
-        border: solid $border-size $facebookColor;
-        color: $facebookColor;
-        background-color: $white;
-    	:hover{
-    		color: $white;
-            background-color: $facebookColor;
-    	}
+        @include social-media-button($facebookColor)
     }
     .twitter {
-    	@include pointer-cursor();
         @include border-radius($radius);
-        border: solid $border-size $twitterColor;
-        background-color: $white;
-        color: $twitterColor;
-    	:hover {
-    		color: $white;
-            background-color: $twitterColor;
-    	}
+        @include social-media-button($twitterColor)
     }
     .google-plus{
-    	@include pointer-cursor();
         @include border-radius($radius);
-        border: solid $border-size $googlePlusColor;
-        color: $googlePlusColor;
-        background-color: $white;
-    	:hover {
-    		color: $white;
-            background-color: $googlePlusColor;
-    	}
+        @include social-media-button($googlePlusColor)
     }
 }
