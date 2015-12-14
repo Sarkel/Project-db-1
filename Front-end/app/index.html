@@ -25,7 +25,7 @@
         <!-- Add your site or application content here -->
         
         <ng-include src="'./templates/pageTemplate.html'"></ng-include>
-
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
         <!--cookies information block-->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -63,6 +63,9 @@
         <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
         <script src="bower_components/ng-websocket/ng-websocket.js"></script>
         <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+        <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+        <script src="bower_components/lodash/lodash.js"></script>
+        <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -73,6 +76,7 @@
         <script src="scripts/services/appSettings.js"></script>
         <script src="scripts/controllers/contactdialog.js"></script>
         <script src="scripts/services/dialogtemplates.js"></script>
+        <script src="scripts/controllers/maps.js"></script>
         <!-- endbuild -->
     </body>
 </html>

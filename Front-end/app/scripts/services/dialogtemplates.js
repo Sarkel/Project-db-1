@@ -28,8 +28,14 @@ angular.module('libraryApp')
       return contactDialogTemplate;
     };
 
+    var _mapDialog = function (){
+      var mapDialogTemplate = 'map template';
+      return mapDialogTemplate;
+    };
+
     // Public API here
     return {
-      contactDialog: _contactDialog
+      contactDialog: _contactDialog,
+      mapDialog: _mapDialog
     };
   });

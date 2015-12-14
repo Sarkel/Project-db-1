@@ -12,3 +12,5 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "./custom_css/_logowanie.scss";
 @import "./custom_css/_contact_dialog.scss";
 //end custom css
+html, body { height: 100%; margin: 0; padding: 0; }
+  #map { height: 100%; }

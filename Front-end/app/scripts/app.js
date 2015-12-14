@@ -61,13 +61,29 @@ angular
       window.open(direction);
     };
 
-    $rootScope.openDialog = function (){
-      var dialogId = ngDialog.open({
+    $rootScope.openContactDialog = function (){
+      dialog({
         template: dialogTemplates.contactDialog(),
-        plain: true,
-        controller: 'ContactdialogCtrl'
+        controller: 'ContactdialogCtrl',
+        event: 'contactDialogEvent'
       });
-      $rootScope.$broadcast('contactDialogEvent', {
+    };
+
+    $rootScope.openMapDialog = function (){
+      dialog({
+        template: dialogTemplates.mapDialog(),
+        controller: 'MapsCtrl',
+        event: 'mapDialogEvent'
+      });
+    };
+
+    var dialog = function (properties){
+      var dialogId = ngDialog.open({
+        template: properties.template,
+        plain: true,
+        controller: properties.controller
+      });
+      $rootScope.$broadcast(properties.event, {
         dialogId: dialogId
       });
     };
