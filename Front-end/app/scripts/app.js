@@ -48,6 +48,7 @@ angular
 
     $rootScope.cookiesConfirmed = false;
 
+    $rootScope.user = {};
     var init = function (){
       appSettings.getAppSettings().then(function (result){
         $rootScope.appSettings = result.data;

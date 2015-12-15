@@ -11,3 +11,20 @@
     padding-right: $paddingLR;
     background-color: $white;
 }
+
+.table {
+	display: table;
+	& > * {
+		display: table-row;
+		text-align: center;
+	}
+}
+
+a {
+	color: $black !important;
+	text-decoration: none !important;
+	&:hover {
+		text-decoration: none !important;
+		color: $black !important;
+	}
+}

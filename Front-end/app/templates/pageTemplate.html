@@ -31,16 +31,16 @@
             </div>
         </div>
         <div class="navbar-text navbar-right">
-            <a ng-href="#/koszyk">
-            <i class="fa fa-shopping-basket fa-2x"></i>
-            <span>Twój koszyk</span>
+            <a ng-href="#/koszyk" class="table">
+                <i class="fa fa-shopping-basket fa-2x"></i>
+                <span>Twój koszyk</span>
             </a>
         </div>
         <div class="navbar-text navbar-right">
-            <a ng-href="#/logowanie">
-            <i class="fa fa-user fa-2x"></i>
-            <span ng-hide="isLogged">Zaloguj się</span>
-            <span ng-show="isLogged" ng-bind="user.login"></span>
+            <a ng-href="#/logowanie" class="table">
+                <i class="fa fa-user fa-2x"></i>
+                <span ng-hide="isLogged">Zaloguj się</span>
+                <span ng-show="isLogged" ng-bind="user.login"></span>
             </a>
         </div>
     </div>
