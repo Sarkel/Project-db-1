@@ -147,7 +147,7 @@ CREATE TABLE Biblioteka.Komentarz (
 	Komentarz_ID serial NOT NULL,
 	Urzytkownik int NOT NULL,
 	Ksiazka int NOT NULL,
-	Tekst VARCHAR(255) NOT NULL,
+	Tekst VARCHAR(255),
 	Data TIMESTAMP NOT NULL,
 	Ilosc_gwiazdek Biblioteka.star NOT NULL DEFAULT 0,
 	CONSTRAINT Komentarz_pk PRIMARY KEY (Komentarz_ID)

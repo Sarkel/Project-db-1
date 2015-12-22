@@ -9,11 +9,8 @@
 class DateBaseSettingsWrapper
 {
     public $dbName;
-
     public $host;
-
     public $dbUser;
-
     public $dbPwd;
 
     function __construct($_settings){
