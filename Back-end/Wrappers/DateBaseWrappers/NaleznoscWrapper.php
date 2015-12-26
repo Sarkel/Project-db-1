@@ -21,6 +21,6 @@ class NaleznoscWrapper
         $this -> opis = $opis;
         $this -> wartosc = $wartosc;
         $this -> uzytkownikWypKsiaz = $uzytkownikWypKsiaz;
-        $this -> $ksiazkaWypKsiaz;
+        $this -> ksiazkaWypKsiaz = $ksiazkaWypKsiaz;
     }
 }

@@ -9,8 +9,8 @@ CREATE TABLE Biblioteka.Uzytkownik (
 	Adres int NOT NULL,
 	Pwd_Seed TEXT NOT NULL,
 	Typ int NOT NULL,
-	Telefon_komorkowy Biblioteka.phoneNumber,
-	Telefon_stacjonarny Biblioteka.phoneNumber,
+	Telefon_komorkowy Biblioteka.phone_number,
+	Telefon_stacjonarny Biblioteka.phone_number,
 	Aktywny BOOLEAN NOT NULL DEFAULT TRUE,
 	CONSTRAINT Uzytkownik_pk PRIMARY KEY (Uzytkownik_ID)
 ) WITH (
@@ -59,8 +59,8 @@ CREATE TABLE Biblioteka.Autor (
 
 
 
-CREATE TABLE Biblioteka.Nalezkosc (
-	Nalezkosc_ID serial NOT NULL,
+CREATE TABLE Biblioteka.Naleznosc (
+	Naleznosc_ID serial NOT NULL,
 	Uzytkownik_wyp_ksia int,
 	Ksiazka_wyp_ksia int,
 	Uzytkownik int NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE Biblioteka.Nalezkosc (
 	Opis VARCHAR(80) NOT NULL,
 	Wartosc numeric(10,2) NOT NULL CHECK (Wartosc > 0),
 	Uiszczona BOOLEAN NOT NULL DEFAULT FALSE,
-	CONSTRAINT Nalezkosc_pk PRIMARY KEY (Nalezkosc_ID)
+	CONSTRAINT Naleznosc_pk PRIMARY KEY (Naleznosc_ID)
 ) WITH (
   OIDS=FALSE
 );
@@ -191,9 +191,9 @@ ALTER TABLE Biblioteka.Adres ADD CONSTRAINT Adres_fk0 FOREIGN KEY (Kod_pocztowy)
 
 
 
-ALTER TABLE Biblioteka.Nalezkosc ADD CONSTRAINT Nalezkosc_fk0 FOREIGN KEY (Uzytkownik_wyp_ksia) REFERENCES Biblioteka.Wypozyczona_ksiazka(Uzytkownik);
-ALTER TABLE Biblioteka.Nalezkosc ADD CONSTRAINT Nalezkosc_fk1 FOREIGN KEY (Ksiazka_wyp_ksia) REFERENCES Biblioteka.Wypozyczona_ksiazka(Ksiazka);
-ALTER TABLE Biblioteka.Nalezkosc ADD CONSTRAINT Nalezkosc_fk2 FOREIGN KEY (Uzytkownik) REFERENCES Biblioteka.Uzytkownik(Uzytkownik_ID);
+ALTER TABLE Biblioteka.Naleznosc ADD CONSTRAINT Naleznosc_fk0 FOREIGN KEY (Uzytkownik_wyp_ksia) REFERENCES Biblioteka.Wypozyczona_ksiazka(Uzytkownik);
+ALTER TABLE Biblioteka.Naleznosc ADD CONSTRAINT Naleznosc_fk1 FOREIGN KEY (Ksiazka_wyp_ksia) REFERENCES Biblioteka.Wypozyczona_ksiazka(Ksiazka);
+ALTER TABLE Biblioteka.Naleznosc ADD CONSTRAINT Naleznosc_fk2 FOREIGN KEY (Uzytkownik) REFERENCES Biblioteka.Uzytkownik(Uzytkownik_ID);
 
 ALTER TABLE Biblioteka.Wypozyczona_ksiazka ADD CONSTRAINT Wypozyczona_ksiazka_fk0 FOREIGN KEY (Uzytkownik) REFERENCES Biblioteka.Uzytkownik(Uzytkownik_ID);
 ALTER TABLE Biblioteka.Wypozyczona_ksiazka ADD CONSTRAINT Wypozyczona_ksiazka_fk1 FOREIGN KEY (Ksiazka) REFERENCES Biblioteka.Ksiazka(Ksiazka_ID);

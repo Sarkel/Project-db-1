@@ -7,8 +7,8 @@ CREATE DOMAIN Biblioteka.email AS TEXT CONSTRAINT valid_value CHECK (VALUE ~ '.+
 COMMENT ON DOMAIN Biblioteka.email IS 'Domain represent valid email.';
 
 --numer telefonu
-CREATE DOMAIN Biblioteka.phoneNumber AS TEXT CONSTRAINT valid_value CHECK (VALUE ~ '^[0-9]*$');
-COMMENT ON DOMAIN Biblioteka.phoneNumber IS 'Domain represent phone number.';
+CREATE DOMAIN Biblioteka.phone_number AS TEXT CONSTRAINT valid_value CHECK (VALUE ~ '^[0-9]*$');
+COMMENT ON DOMAIN Biblioteka.phone_number IS 'Domain represent phone number.';
 
 --rok 1812-3048
 CREATE DOMAIN Biblioteka.year AS TEXT CONSTRAINT valid_value CHECK (VALUE ~ '^(181[2-9]|18[2-9]\d|19\d\d|2\d{3}|30[0-3]\d|304[0-8])$');

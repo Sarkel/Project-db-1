@@ -19,9 +19,6 @@ CREATE OR REPLACE FUNCTION Biblioteka.validate_message() RETURNS TRIGGER AS '
 	END;
 ' LANGUAGE plpgsql;
 
-CREATE TRIGGER Wiadomosc_trigger BEFORE UPDATE OR DELETE ON Biblioteka.Wiadomosc FOR EACH ROW EXECUTE PROCEDURE Biblioteka.validate_message();
-
-
 
 --ksiazka
 CREATE OR REPLACE FUNCTION Biblioteka.validate_book() RETURNS TRIGGER AS '
@@ -38,9 +35,6 @@ CREATE OR REPLACE FUNCTION Biblioteka.validate_book() RETURNS TRIGGER AS '
 	END;
 ' LANGUAGE plpgsql;
 
-CREATE TRIGGER Ksiazka_trigger BEFORE DELETE ON Biblioteka.Ksiazka FOR EACH ROW EXECUTE PROCEDURE Biblioteka.validate_book();
-
-
 
 --autor
 CREATE OR REPLACE FUNCTION Biblioteka.validate_author() RETURNS TRIGGER AS '
@@ -55,9 +49,6 @@ CREATE OR REPLACE FUNCTION Biblioteka.validate_author() RETURNS TRIGGER AS '
 		END IF;
 	END;
 ' LANGUAGE plpgsql;
-
-CREATE TRIGGER Autor_trigger BEFORE DELETE ON Biblioteka.Autor FOR EACH ROW EXECUTE PROCEDURE Biblioteka.validate_author();
-
 
 
 --wypozyczona_ksiazka
@@ -79,8 +70,6 @@ CREATE OR REPLACE FUNCTION Biblioteka.validate_borrowed_book() RETURNS TRIGGER A
 	END;
 ' LANGUAGE plpgsql;
 
-CREATE TRIGGER Wypozyczona_ksiazka_trigger BEFORE INSERT OR DELETE ON Biblioteka.Wypozyczona_ksiazka FOR EACH ROW EXECUTE PROCEDURE Biblioteka.validate_borrowed_book();
-
 
 --uzytkownik
 CREATE OR REPLACE FUNCTION Biblioteka.vlidate_user() RETURNS TRIGGER AS '
@@ -99,7 +88,7 @@ CREATE OR REPLACE FUNCTION Biblioteka.vlidate_user() RETURNS TRIGGER AS '
 			nStatus := new.Aktywny;
 			userId := old.Uzytkownik_ID;
 			IF (oStatus != nStatus) THEN
-				IF (EXISTS (SELECT n.Nalezkosc_ID FROM Biblioteka.Nalezkosc AS n WHERE n.Uzytkownik = userId)) THEN
+				IF (EXISTS (SELECT n.Naleznosc_ID FROM Biblioteka.Naleznosc AS n WHERE n.Uzytkownik = userId)) THEN
 					RETURN NULL;
 				ELSEIF (EXISTS (SELECT * FROM Wypozyczona_ksiazka AS wk WHERE wk.Uzytkownik = userId)) THEN
 					RETURN NULL;
@@ -126,4 +115,10 @@ CREATE OR REPLACE FUNCTION Biblioteka.vlidate_user() RETURNS TRIGGER AS '
 	END;
 ' LANGUAGE plpgsql;
 
+
+
 CREATE TRIGGER Uzytkownik_trigger BEFORE UPDATE OR INSERT ON Biblioteka.Uzytkownik FOR EACH ROW EXECUTE PROCEDURE Biblioteka.vlidate_user();
+CREATE TRIGGER Wiadomosc_trigger BEFORE UPDATE OR DELETE ON Biblioteka.Wiadomosc FOR EACH ROW EXECUTE PROCEDURE Biblioteka.validate_message();
+CREATE TRIGGER Wypozyczona_ksiazka_trigger BEFORE INSERT OR DELETE ON Biblioteka.Wypozyczona_ksiazka FOR EACH ROW EXECUTE PROCEDURE Biblioteka.validate_borrowed_book();
+CREATE TRIGGER Ksiazka_trigger BEFORE DELETE ON Biblioteka.Ksiazka FOR EACH ROW EXECUTE PROCEDURE Biblioteka.validate_book();
+CREATE TRIGGER Autor_trigger BEFORE DELETE ON Biblioteka.Autor FOR EACH ROW EXECUTE PROCEDURE Biblioteka.validate_author();
