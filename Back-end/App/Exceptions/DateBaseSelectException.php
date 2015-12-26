@@ -6,7 +6,9 @@
  * Date: 25.12.2015
  * Time: 22:07
  */
-class CustomDateBaseException extends PDOException
+
+namespace App\Exceptions;
+class DateBaseSelectException extends CustomDateBaseException
 {
 
 }

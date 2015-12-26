@@ -6,6 +6,8 @@
  * Date: 22.12.2015
  * Time: 23:18
  */
+
+namespace App\Wrappers\DateBaseWrappers;
 class AvatarWrapper
 {
     public $id;

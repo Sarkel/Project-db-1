@@ -6,6 +6,8 @@
  * Date: 25.12.2015
  * Time: 22:25
  */
+
+namespace App\Wrappers;
 class DateBaseFieldsWrapper
 {
     public $tableName;

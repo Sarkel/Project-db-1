@@ -6,6 +6,7 @@
  * Time: 23:22
  */
 
+namespace App\Wrappers;
 class DateBaseSettingsWrapper
 {
     public $dbName;

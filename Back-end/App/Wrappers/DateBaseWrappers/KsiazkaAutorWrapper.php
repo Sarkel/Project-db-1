@@ -6,6 +6,8 @@
  * Date: 22.12.2015
  * Time: 23:27
  */
+
+namespace App\Wrappers\DateBaseWrappers;
 class KsiazkaAutorWrapper
 {
     public $ksiazka;

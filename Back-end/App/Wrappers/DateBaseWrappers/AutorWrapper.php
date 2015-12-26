@@ -6,6 +6,8 @@
  * Date: 22.12.2015
  * Time: 23:31
  */
+
+namespace App\Wrappers\DateBaseWrappers;
 class AutorWrapper
 {
     public $id;

@@ -6,6 +6,8 @@
  * Date: 21.12.2015
  * Time: 23:44
  */
+
+namespace App\Wrappers;
 abstract class ResponseWrapper
 {
     public $success;

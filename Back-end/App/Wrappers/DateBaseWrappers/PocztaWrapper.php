@@ -6,6 +6,8 @@
  * Date: 22.12.2015
  * Time: 22:53
  */
+
+namespace App\Wrappers\DateBaseWrappers;
 class PocztaWrapper
 {
     public $id;

@@ -6,6 +6,8 @@
  * Date: 22.12.2015
  * Time: 23:14
  */
+
+namespace App\Wrappers\DateBaseWrappers;
 class KomentarzWrapper
 {
     public $id;
