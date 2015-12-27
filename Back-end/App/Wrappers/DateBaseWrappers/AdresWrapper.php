@@ -10,17 +10,11 @@
 namespace App\Wrappers\DateBaseWrappers;
 class AdresWrapper
 {
-    public $id;
-    public $kodPocztowy;
-    public $ulica;
-    public $numerDomu;
-    public $numerMieszkania;
-
-    public function __construct($id, $kodPocztowy, $numerDomu, $numerMieszkania = null, $ulica = null){
-        $this -> id = $id;
-        $this -> kodPocztowy = $kodPocztowy;
-        $this -> ulica = $ulica;
-        $this -> numerDomu = $numerDomu;
-        $this -> numerMieszkania = $numerMieszkania;
+    public function __construct($id, $kodPocztowy = null, $numerDomu = null, $numerMieszkania = null, $ulica = null){
+        $this->id = $id;
+        if(!is_null($kodPocztowy)) $this->kodPocztowy = $kodPocztowy;
+        if(!is_null($ulica)) $this->ulica = $ulica;
+        if(!is_null($numerDomu)) $this->numerDomu = $numerDomu;
+        if(!is_null($numerMieszkania)) $this->numerMieszkania = $numerMieszkania;
     }
 }

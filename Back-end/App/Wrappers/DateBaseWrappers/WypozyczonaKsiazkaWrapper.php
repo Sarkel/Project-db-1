@@ -10,15 +10,10 @@
 namespace App\Wrappers\DateBaseWrappers;
 class WypozyczonaKsiazkaWrapper
 {
-    public $uzytkownik;
-    public $ksiazka;
-    public $dataWypozyczenia;
-    public $dataOddania;
-
-    public function __construct($uzytkownik, $ksiazka, $dataWypozyczenia, $dataOddania) {
-        $this -> uzytkownik = $uzytkownik;
-        $this -> ksiazka = $ksiazka;
-        $this -> dataWypozyczenia = $dataWypozyczenia;
-        $this -> dataOddania = $dataOddania;
+    public function __construct($uzytkownik, $ksiazka, $dataWypozyczenia = null, $dataOddania = null) {
+        $this->uzytkownik = $uzytkownik;
+        $this->ksiazka = $ksiazka;
+        if(!is_null($dataWypozyczenia)) $this->dataWypozyczenia = $dataWypozyczenia;
+        if(!is_null($dataOddania)) $this->dataOddania = $dataOddania;
     }
 }

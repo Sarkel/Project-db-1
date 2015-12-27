@@ -10,17 +10,11 @@
 namespace App\Wrappers\DateBaseWrappers;
 class WiadomoscWrapper
 {
-    public $id;
-    public $adresat;
-    public $odbiorca;
-    public $tekst;
-    public $data;
-
-    public function __construct($id, $adresat, $odbiorca, $tekst, $data) {
-        $this -> id = $id;
-        $this -> adresat = $adresat;
-        $this -> odbiorca = $odbiorca;
-        $this -> tekst = $tekst;
-        $this -> data = $data;
+    public function __construct($id, $adresat = null, $odbiorca = null, $tekst = null, $data = null) {
+        $this->id = $id;
+        if(!is_null($adresat)) $this->adresat = $adresat;
+        if(!is_null($odbiorca)) $this->odbiorca = $odbiorca;
+        if(!is_null($tekst)) $this->tekst = $tekst;
+        if(!is_null($data)) $this->data = $data;
     }
 }

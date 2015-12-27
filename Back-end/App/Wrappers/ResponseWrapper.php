@@ -8,16 +8,12 @@
  */
 
 namespace App\Wrappers;
-abstract class ResponseWrapper
+class ResponseWrapper
 {
-    public $success;
-    public $msg;
-    public $data;
-
     public function __construct($success, $msg, $data = null){
-        $this -> status = $success;
-        $this -> msg = $msg;
-        $this -> data = $data;
+        $this->success = $success;
+        $this->msg = $msg;
+        if(!is_null($data)) $this->data = $data;
     }
 
     public function toJson(){

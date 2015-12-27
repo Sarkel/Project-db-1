@@ -35,9 +35,9 @@ class DateBase
             $this->db = $this->connect();
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new DateBaseConnectionException();
+            throw new DateBaseConnectionException($e->getMessage(), $e->getCode(), $e);
         } catch (Exception $e) {
-            throw new CustomException();
+            throw new CustomException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -57,7 +57,7 @@ class DateBase
 
     public function insert($tableAlias, $params)
     {
-        if (!$this->isValidString($tableAlias) || !$this->isValidArray($params)) throw new CustomException();
+        if (!$this->isValidString($tableAlias) || !$this->isValidArray($params)) throw new CustomException('Invalid input params.');
         try {
             $fields = '';
             $values = '';
@@ -77,16 +77,16 @@ class DateBase
             $this->db->commit();
         } catch (PDOException $e) {
             $this->db->rollBack();
-            throw new DateBaseDMLException();
+            throw new DateBaseDMLException($e->getMessage(), $e->getCode(), $e);
         } catch (Exception $e) {
             $this->db->rollBack();
-            throw new CustomException();
+            throw new CustomException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
     public function delete($tableAlias, $whereConditions = null)
     {
-        if (!$this->isValidString($tableAlias)) throw new CustomException();
+        if (!$this->isValidString($tableAlias)) throw new CustomException('Invalid input params.');
         try {
             $tableDescription = DateBaseFieldsWrapper::getDateBaseProperties($tableAlias);
             $tableName = $tableDescription->tableName;
@@ -99,16 +99,16 @@ class DateBase
             $this->db->commit();
         } catch (PDOException $e) {
             $this->db->rollBack();
-            throw new DateBaseDMLException();
+            throw new DateBaseDMLException($e->getMessage(), $e->getCode(), $e);
         } catch (Exception $e) {
             $this->db->rollBack();
-            throw new CustomException();
+            throw new CustomException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
     public function update($tableAlias, $setParams, $whereConditions = null)
     {
-        if(!$this->isValidString($tableAlias) || !$this->isValidArray($setParams)) throw new CustomException();
+        if(!$this->isValidString($tableAlias) || !$this->isValidArray($setParams)) throw new CustomException('Invalid input params.');
         try {
             $tableDescription = DateBaseFieldsWrapper::getDateBaseProperties($tableAlias);
             $tableName = $tableDescription->tableName;
@@ -129,22 +129,21 @@ class DateBase
             $this->db->commit();
         } catch (PDOException $e) {
             $this->db->rollBack();
-            throw new DateBaseDMLException($e->getMessage());
+            throw new DateBaseDMLException($e->getMessage(), $e->getCode(), $e);
         } catch (Exception $e) {
             $this->db->rollBack();
-            throw new CustomException();
+            throw new CustomException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
     public function select($tableAlias, $fields, $whereCondition = null)
     {
-        //if($this->isValidString($query)) throw new CustomException();
         try {
 
         } catch (PDOException $e) {
-            throw new DateBaseSelectException();
+            throw new DateBaseSelectException($e->getMessage(), $e->getCode(), $e);
         } catch (Exception $e) {
-            throw new CustomException();
+            throw new CustomException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -169,9 +168,8 @@ class DateBase
             $whereString .= "WHERE ";
             foreach ($whereConditions as $value) {
                 $fieldName = $tableFields[$value->fieldAlias];
-                $innerValue = new WhereConditionWrapper($value->fieldAlias, $value->fieldValue);
-                $fieldValues = $innerValue->getValuesString();
-                if($this->isValidObject($value) && $innerValue->isSet){
+                $fieldValues = $value->getValuesString();
+                if($this->isValidObject($value) && $value->isSet){
                     $whereString .= "$fieldName IN $fieldValues,";
                 } elseif($this->isValidObject($value)){
                     $whereString .= "$fieldName = '$fieldValues',";

@@ -10,11 +10,8 @@
 namespace App\Wrappers\DateBaseWrappers;
 class RodzajUzytkownikaWrapper
 {
-    public $id;
-    public $nazwa;
-
-    public function __construct($id, $nazwa) {
-        $this -> id = $id;
-        $this -> nazwa = $nazwa;
+    public function __construct($id, $nazwa = null) {
+        $this->id = $id;
+        if(!is_null($nazwa)) $this->nazwa = $nazwa;
     }
 }

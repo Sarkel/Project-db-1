@@ -10,19 +10,13 @@
 namespace App\Wrappers\DateBaseWrappers;
 class KomentarzWrapper
 {
-    public $id;
-    public $uzytkownik;
-    public $ksiazka;
-    public $tekst;
-    public $data;
-    public $iloscGwizdek;
-
-    public function __construct($id, $uzytkownik, $ksiazka, $data, $iloscGwizdek, $tekst = null) {
-        $this -> id = $id;
-        $this -> uzytkownik = $uzytkownik;
-        $this -> ksiazka = $ksiazka;
-        $this -> tekst = $tekst;
-        $this -> data = $data;
-        $this -> iloscGwizdek = $iloscGwizdek;
+    public function __construct($id, $uzytkownik = null, $ksiazka = null,
+                                $data = null, $iloscGwizdek = null, $tekst = null) {
+        $this->id = $id;
+        if(!is_null($uzytkownik)) $this->uzytkownik = $uzytkownik;
+        if(!is_null($ksiazka)) $this->ksiazka = $ksiazka;
+        if(!is_null($tekst)) $this->tekst = $tekst;
+        if(!is_null($data)) $this->data = $data;
+        if(!is_null($iloscGwizdek)) $this->iloscGwizdek = $iloscGwizdek;
     }
 }

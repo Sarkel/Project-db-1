@@ -10,13 +10,9 @@
 namespace App\Wrappers\DateBaseWrappers;
 class KsiazkaAutorWrapper
 {
-    public $ksiazka;
-    public $autor;
-    public $rodzajPowiazania;
-
-    public function __construct($ksiazka, $autor, $rodzajPowiazania) {
-        $this -> ksiazka = $ksiazka;
-        $this -> autor = $autor;
-        $this -> rodzajPowiazania = $rodzajPowiazania;
+    public function __construct($ksiazka, $autor, $rodzajPowiazania = null) {
+        $this->ksiazka = $ksiazka;
+        $this->autor = $autor;
+        if(!is_null($rodzajPowiazania)) $this->rodzajPowiazania = $rodzajPowiazania;
     }
 }

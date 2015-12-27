@@ -10,27 +10,18 @@
 namespace App\Wrappers\DateBaseWrappers;
 class UzytkownikWrapper
 {
-    public $id;
-    public $email;
-    public $nazwisko;
-    public $imie;
-    public $avatar;
-    public $adres;
-    public $typ;
-    public $komorka;
-    public $stacjonarny;
-    public $aktywny;
+    public function __construct($id, $email = null, $nazwisko = null, $imie = null, $aktywny = null,
+                                $adres = null, $typ = null, $komorka = null, $stacjonarny = null, $avatar = null){
 
-    public function __construct($id, $email, $nazwisko, $imie, $aktywny, $adres, $typ,
-                                $komorka = null, $stacjonarny = null, $avatar = null){
-        $this -> email = $email;
-        $this -> nazwisko = $nazwisko;
-        $this -> imie = $imie;
-        $this -> avatar = $avatar;
-        $this -> adres = $adres;
-        $this -> typ = $typ;
-        $this -> komorka = $komorka;
-        $this -> stacjonarny = $stacjonarny;
-        $this -> aktywny = $aktywny;
+        $this->id = $id;
+        if(!is_null($email)) $this->email = $email;
+        if(!is_null($nazwisko)) $this->nazwisko = $nazwisko;
+        if(!is_null($imie)) $this->imie = $imie;
+        if(!is_null($avatar)) $this->avatar = $avatar;
+        if(!is_null($adres)) $this->adres = $adres;
+        if(!is_null($typ)) $this->typ = $typ;
+        if(!is_null($komorka)) $this->komorka = $komorka;
+        if(!is_null($stacjonarny)) $this->stacjonarny = $stacjonarny;
+        if(!is_null($aktywny)) $this->aktywny = $aktywny;
     }
 }

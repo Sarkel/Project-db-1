@@ -10,10 +10,6 @@
 namespace App\Wrappers;
 class WhereConditionWrapper
 {
-    public $isSet;
-    public $fieldAlias;
-    public $fieldValue;
-
     public function __construct($fieldAlias, $fieldValue)
     {
         $this->fieldValue = $fieldValue;

@@ -10,15 +10,10 @@
 namespace App\Wrappers\DateBaseWrappers;
 class AutorWrapper
 {
-    public $id;
-    public $imie;
-    public $nazwisko;
-    public $krajPochodzenia;
-
-    public function __construct($id, $imie, $nazwisko, $krajPochodzenia = null) {
-        $this -> id = $id;
-        $this -> imie = $imie;
-        $this -> nazwisko = $nazwisko;
-        $this -> krajPochodzenia = $krajPochodzenia;
+    public function __construct($id, $imie = null, $nazwisko = null, $krajPochodzenia = null) {
+        $this->id = $id;
+        if(!is_null($imie)) $this->imie = $imie;
+        if(!is_null($nazwisko)) $this->nazwisko = $nazwisko;
+        if(!is_null($krajPochodzenia)) $this->krajPochodzenia = $krajPochodzenia;
     }
 }

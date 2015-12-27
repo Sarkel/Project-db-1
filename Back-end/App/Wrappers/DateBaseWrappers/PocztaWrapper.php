@@ -10,15 +10,10 @@
 namespace App\Wrappers\DateBaseWrappers;
 class PocztaWrapper
 {
-    public $id;
-    public $kodPocztowy;
-    public $miejscowosc;
-    public $kraj;
-
-    public function __construct($id, $kodPocztowy, $miejscowosc, $kraj){
-        $this -> id = $id;
-        $this -> kodPocztowy = $kodPocztowy;
-        $this -> miejscowosc = $miejscowosc;
-        $this -> kraj = $kraj;
+    public function __construct($id, $kodPocztowy = null, $miejscowosc = null, $kraj = null){
+        $this->id = $id;
+        if(!is_null($kodPocztowy)) $this->kodPocztowy = $kodPocztowy;
+        if(!is_null($miejscowosc)) $this->miejscowosc = $miejscowosc;
+        if(!is_null($kraj)) $this->kraj = $kraj;
     }
 }

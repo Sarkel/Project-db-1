@@ -10,13 +10,9 @@
 namespace App\Wrappers\DateBaseWrappers;
 class WydawnictwoWrapper
 {
-    public $id;
-    public $nazwa;
-    public $krajPochodzenia;
-
-    public function __construct($id, $nazwa, $krajPochodzenia = null) {
-        $this -> id = $id;
-        $this -> nazwa = $nazwa;
-        $this -> krajPochodzenia = $krajPochodzenia;
+    public function __construct($id, $nazwa = null, $krajPochodzenia = null) {
+        $this->id = $id;
+        if(!is_null($nazwa)) $this->nazwa = $nazwa;
+        if(!is_null($krajPochodzenia)) $this->krajPochodzenia = $krajPochodzenia;
     }
 }
