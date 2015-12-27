@@ -22,6 +22,7 @@ use App\Exceptions\DateBaseSelectException;
 use App\Wrappers\DateBaseSettingsWrapper;
 use App\Wrappers\DateBaseFieldsWrapper;
 use App\Wrappers\WhereConditionWrapper;
+use App\Wrappers\DateBaseResponseWrapper;
 class DateBase
 {
     private $settings;
@@ -75,6 +76,7 @@ class DateBase
             $this->db->beginTransaction();
             $statement->execute($params);
             $this->db->commit();
+            return true;
         } catch (PDOException $e) {
             $this->db->rollBack();
             throw new DateBaseDMLException($e->getMessage(), $e->getCode(), $e);
@@ -97,6 +99,7 @@ class DateBase
             $this->db->beginTransaction();
             $statement->execute();
             $this->db->commit();
+            return true;
         } catch (PDOException $e) {
             $this->db->rollBack();
             throw new DateBaseDMLException($e->getMessage(), $e->getCode(), $e);
@@ -127,6 +130,7 @@ class DateBase
             $this->db->beginTransaction();
             $statement->execute();
             $this->db->commit();
+            return true;
         } catch (PDOException $e) {
             $this->db->rollBack();
             throw new DateBaseDMLException($e->getMessage(), $e->getCode(), $e);
@@ -136,10 +140,34 @@ class DateBase
         }
     }
 
-    public function select($tableAlias, $fields, $whereCondition = null)
+    public function select($tableAlias, $fields = null, $whereCondition = null, $otherOptions = null)
     {
         try {
-
+            $tableDescription = DateBaseFieldsWrapper::getDateBaseProperties($tableAlias);
+            $tableName = $tableDescription->tableName;
+            $tableFields = $tableDescription->tableFields;
+            $fieldsString = '';
+            if(is_null($fields)){
+                $fieldsString = '*';
+            } elseif($this->isValidArray($fields)) {
+                foreach($fields as $field){
+                    $fieldsString .= "$field,";
+                }
+                $fieldsString = trim($fieldsString, ',');
+            } else{
+                throw new CustomException('Invalid input params.');
+            }
+            $result = [];
+            foreach($this->db->query("SELECT $fieldsString FROM $tableName $whereCondition $otherOptions") as $row){
+                $rowWrapper = new DateBaseResponseWrapper();
+                foreach($tableFields as $alias => $original){
+                    foreach($row as $key => $value){
+                        if($original === $key) $rowWrapper->setProperty($alias, $value);
+                    }
+                }
+                array_push($result, $rowWrapper);
+            }
+            return $result;
         } catch (PDOException $e) {
             throw new DateBaseSelectException($e->getMessage(), $e->getCode(), $e);
         } catch (Exception $e) {

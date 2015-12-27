@@ -127,8 +127,8 @@ class DateBaseFieldsWrapper
     ];
 
     private static $rodzajUzytkownika = [
-        'id' => 'Rodzaj_uzytkownika_ID	',
-        'nazwa' => 'Nazwa'
+        'id' => 'rodzaj_uzytkownika_id',
+        'nazwa' => 'nazwa'
     ];
 
     private static $uzytkownik = [

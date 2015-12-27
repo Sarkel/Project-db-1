@@ -1,7 +1,7 @@
 --tworzenie tabel
 CREATE TABLE Biblioteka.Uzytkownik (
 	Uzytkownik_ID serial NOT NULL,
-	Email Biblioteka.email NOT NULL,
+	Email Biblioteka.email NOT NULL UNIQUE,
 	Hasło TEXT NOT NULL,
 	Nazwisko VARCHAR(255) NOT NULL,
 	Imie VARCHAR(255) NOT NULL,
