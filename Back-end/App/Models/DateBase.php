@@ -31,7 +31,7 @@ class DateBase
     public function __construct()
     {
         try {
-            $content = file_get_contents('./Mocks/ServerSiteSettings.json');
+            $content = file_get_contents('./Mocks/DateBaseSettings.json');
             $this->settings = new DateBaseSettingsWrapper(json_decode($content, true));
             $this->db = $this->connect();
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
