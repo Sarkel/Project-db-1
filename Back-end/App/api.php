@@ -13,3 +13,8 @@ function __autoload($className) {
     $file = __ROOT__ . $ds . str_replace('\\', $ds, $className) . '.php';
     if(is_readable($file)) require_once $file;
 }
+
+use App\Models\ApiModel;
+
+$api = new ApiModel();
+$api->run();

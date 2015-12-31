@@ -1,0 +1,11 @@
+[
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "KsiazkaModel",
+    "method": "getAllBooks",
+    "hasParams": false,
+    "httpMethod": "GET",
+    "endpoint": "/books",
+    "description": "Get list all books"
+  }
+]
