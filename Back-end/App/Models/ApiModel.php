@@ -10,16 +10,19 @@ namespace App\Models;
 
 
 use App\Exceptions\CustomException;
+use App\Wrappers\EndpointComparerResponseWrapper;
 use App\Wrappers\ResponseWrapper;
 
 class ApiModel
 {
     private $requestMethod;
     private $endPoint;
+    private $bodyParams;
 
     public function __construct(){
         $this->setRequestURI();
         $this->setRequestMethod();
+        $this->getBodyParams();
     }
 
     private function setRequestMethod(){
@@ -37,26 +40,35 @@ class ApiModel
 
     private function setRequestURI(){
         $requestURI = $_SERVER['REQUEST_URI'];
-        $this->endPoint = explode('api.php', $requestURI)[1];
+        $this->endPoint = explode('/', explode('api.php', $requestURI)[1]);
+    }
+
+    private function getBodyParams(){
+        $this->bodyParams = json_decode(file_get_contents('php://input'));
     }
 
     private function compareEndpoints(){
         $content = file_get_contents('./Mocks/ServerRoutes.json');
+        if(count($this->endPoint) === 1) return null;
         foreach(json_decode($content, true) as $value){
             $params = explode('/', $value['endpoint']);
-            $currentParams = explode('/', $this->endPoint);
+            $currentParams = $this->endPoint;
+            if(count($params) !== count($currentParams)) continue;
             $isCorrect = true;
+            $queryValues = [];
             for($i=0; $i<count($currentParams); $i++){
-                $beg = strpos($params[$i], '{');
-                $end = strpos($params[$i], '}');
-                if(!($beg && $end) && $params[$i] !== $currentParams[$i]){
+                $beg = is_numeric(strpos($params[$i], '{'));
+                $end = is_numeric(strpos($params[$i], '}'));
+                if($beg && $end){
+                    array_push($queryValues, $currentParams[$i]);
+                } elseif($params[$i] !== $currentParams[$i]){
                     $isCorrect = false;
                     break;
                 }
             }
 
-            if($isCorrect){
-                return $value;
+            if($isCorrect && $value['httpMethod'] === $this->requestMethod){
+                return new EndpointComparerResponseWrapper($value, $queryValues);
             } else {
                 continue;
             }
@@ -64,17 +76,27 @@ class ApiModel
         return null;
     }
     public function run(){
-        $toRun = $this->compareEndpoints();
-
-        if($toRun){
+        $comparedValues = $this->compareEndpoints();
+        if($comparedValues){
+            $toRun = $comparedValues->endpointDescription;
             $class = $toRun['namespace'] . '\\' . $toRun['class'];
             $method = $toRun['method'];
-            $response = $class::$method();
+            $hasParams = $toRun['hasParams'];
+            $httpMethod = $toRun['httpMethod'];
+            $params = [];
+            if($hasParams) $params['UriParams'] = $comparedValues->params;
+            if($httpMethod === 'POST' || $httpMethod === 'PUT') $params['BodyParams'] = $this->bodyParams;
+            if(count($params) === 0){
+                $response = $class::$method();
+            } else {
+                $response = $class::$method($params);
+            }
         } else{
             $response = new ResponseWrapper(false, 'No method match.');
         }
 
         $this->createResponse($response);
+        //$this->createResponse(new ResponseWrapper(false, 'No method match.', $this->bodyParams));
     }
 
     private function createResponse(ResponseWrapper $response){

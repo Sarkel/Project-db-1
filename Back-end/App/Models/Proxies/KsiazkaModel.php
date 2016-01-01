@@ -13,7 +13,7 @@ use App\Wrappers\ResponseWrapper;
 
 class KsiazkaModel
 {
-    public static function getAllBooks($param){
-        return new ResponseWrapper(true, 'dziala', $param);
+    public static function getAllBooks(){
+        return new ResponseWrapper(true, 'dziala');
     }
 }
