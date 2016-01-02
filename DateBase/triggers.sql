@@ -1,5 +1,5 @@
 --wiadomosc
-CREATE OR REPLACE FUNCTION Biblioteka.validate_message() RETURNS TRIGGER AS '
+CREATE FUNCTION Biblioteka.validate_message() RETURNS TRIGGER AS '
 	DECLARE
 		o timestamp;
 		ct timestamp;
@@ -21,7 +21,7 @@ CREATE OR REPLACE FUNCTION Biblioteka.validate_message() RETURNS TRIGGER AS '
 
 
 --ksiazka
-CREATE OR REPLACE FUNCTION Biblioteka.validate_book() RETURNS TRIGGER AS '
+CREATE FUNCTION Biblioteka.validate_book() RETURNS TRIGGER AS '
 	DECLARE
 		bookId integer;
 	BEGIN
@@ -37,7 +37,7 @@ CREATE OR REPLACE FUNCTION Biblioteka.validate_book() RETURNS TRIGGER AS '
 
 
 --autor
-CREATE OR REPLACE FUNCTION Biblioteka.validate_author() RETURNS TRIGGER AS '
+CREATE FUNCTION Biblioteka.validate_author() RETURNS TRIGGER AS '
 	DECLARE
 		authorId integer;
 	BEGIN
@@ -52,7 +52,7 @@ CREATE OR REPLACE FUNCTION Biblioteka.validate_author() RETURNS TRIGGER AS '
 
 
 --wypozyczona_ksiazka
-CREATE OR REPLACE FUNCTION Biblioteka.validate_borrowed_book() RETURNS TRIGGER AS '
+CREATE FUNCTION Biblioteka.validate_borrowed_book() RETURNS TRIGGER AS '
 	DECLARE
 		bookId integer;
 	BEGIN
@@ -72,7 +72,7 @@ CREATE OR REPLACE FUNCTION Biblioteka.validate_borrowed_book() RETURNS TRIGGER A
 
 
 --uzytkownik
-CREATE OR REPLACE FUNCTION Biblioteka.vlidate_user() RETURNS TRIGGER AS '
+CREATE FUNCTION Biblioteka.vlidate_user() RETURNS TRIGGER AS '
 	DECLARE
 		oStatus boolean;
 		nStatus boolean;
@@ -100,10 +100,10 @@ CREATE OR REPLACE FUNCTION Biblioteka.vlidate_user() RETURNS TRIGGER AS '
 			END IF;
 		ELSEIF (TG_OP = ''INSERT'') THEN
 
-			SELECT at.Kod_pocztowy INTO postCode FROM Biblioteka.Adres_temp AS at;
-			SELECT at.Ulica INTO street FROM Biblioteka.Adres_temp AS at;
-			SELECT at.Numer_domu INTO homeNo FROM Biblioteka.Adres_temp AS at;
-			SELECT at.Numer_mieszkania INTO flatNo FROM Biblioteka.Adres_temp AS at;
+			SELECT at.Kod_pocztowy INTO postCode FROM Adres_temp AS at;
+			SELECT at.Ulica INTO street FROM Adres_temp AS at;
+			SELECT at.Numer_domu INTO homeNo FROM Adres_temp AS at;
+			SELECT at.Numer_mieszkania INTO flatNo FROM Adres_temp AS at;
 
 			INSERT INTO Biblioteka.Adres (Kod_pocztowy, Ulica, Numer_domu, Numer_mieszkania) VALUES (postCode, street, homeNo, flatNo);
 			

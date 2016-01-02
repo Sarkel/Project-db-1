@@ -21,7 +21,7 @@ CREATE TABLE Biblioteka.Uzytkownik (
 
 CREATE TABLE Biblioteka.Ksiazka (
 	Ksiazka_ID serial NOT NULL,
-	Tytuł TEXT NOT NULL,
+	Tytul TEXT NOT NULL,
 	Rok_wydania Biblioteka.year NOT NULL,
 	ISBN Biblioteka.isbn,
 	Avatar int NOT NULL,
@@ -61,8 +61,7 @@ CREATE TABLE Biblioteka.Autor (
 
 CREATE TABLE Biblioteka.Naleznosc (
 	Naleznosc_ID serial NOT NULL,
-	Uzytkownik_wyp_ksia int,
-	Ksiazka_wyp_ksia int,
+	Ksiazka int,
 	Uzytkownik int NOT NULL,
 	Wyporzyczona_ksiazka int,
 	Opis VARCHAR(80) NOT NULL,
@@ -191,9 +190,8 @@ ALTER TABLE Biblioteka.Adres ADD CONSTRAINT Adres_fk0 FOREIGN KEY (Kod_pocztowy)
 
 
 
-ALTER TABLE Biblioteka.Naleznosc ADD CONSTRAINT Naleznosc_fk0 FOREIGN KEY (Uzytkownik_wyp_ksia) REFERENCES Biblioteka.Wypozyczona_ksiazka(Uzytkownik);
-ALTER TABLE Biblioteka.Naleznosc ADD CONSTRAINT Naleznosc_fk1 FOREIGN KEY (Ksiazka_wyp_ksia) REFERENCES Biblioteka.Wypozyczona_ksiazka(Ksiazka);
-ALTER TABLE Biblioteka.Naleznosc ADD CONSTRAINT Naleznosc_fk2 FOREIGN KEY (Uzytkownik) REFERENCES Biblioteka.Uzytkownik(Uzytkownik_ID);
+ALTER TABLE Biblioteka.Naleznosc ADD CONSTRAINT Naleznosc_fk0 FOREIGN KEY (Ksiazka) REFERENCES Ksiazka(Ksiazka_ID);
+ALTER TABLE Biblioteka.Naleznosc ADD CONSTRAINT Naleznosc_fk1 FOREIGN KEY (Uzytkownik) REFERENCES Uzytkownik(Uzytkownik_ID);
 
 ALTER TABLE Biblioteka.Wypozyczona_ksiazka ADD CONSTRAINT Wypozyczona_ksiazka_fk0 FOREIGN KEY (Uzytkownik) REFERENCES Biblioteka.Uzytkownik(Uzytkownik_ID);
 ALTER TABLE Biblioteka.Wypozyczona_ksiazka ADD CONSTRAINT Wypozyczona_ksiazka_fk1 FOREIGN KEY (Ksiazka) REFERENCES Biblioteka.Ksiazka(Ksiazka_ID);

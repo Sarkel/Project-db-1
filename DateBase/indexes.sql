@@ -1,6 +1,6 @@
 --index on Ksiazka 
 --on Tytuł
-CREATE INDEX Ksiazka_tytuł_idx ON Biblioteka.Ksiazka (Tytuł);
+CREATE INDEX Ksiazka_tytul_idx ON Biblioteka.Ksiazka (Tytul);
 
 --index on Uzytkownik
 --on Nazwa

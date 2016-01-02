@@ -1,0 +1,8 @@
+Books:
+	wyciaganie wszystkich - done
+	search - done
+	detail - done
+	komentarze do ksiazki - done
+	srednia gwiazdek - done
+
+

@@ -6,6 +6,6 @@
     "hasParams": false,
     "httpMethod": "GET",
     "endpoint": "/books",
-    "description": "Get list all books"
+    "description": "Get list of all books"
   }
 ]
