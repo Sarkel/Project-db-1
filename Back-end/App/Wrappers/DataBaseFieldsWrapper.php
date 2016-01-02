@@ -8,7 +8,7 @@
  */
 
 namespace App\Wrappers;
-class DateBaseFieldsWrapper
+class DataBaseFieldsWrapper
 {
     public $tableName;
     public $tableFields;
@@ -19,28 +19,28 @@ class DateBaseFieldsWrapper
     }
 
     public static function getDateBaseProperties($tableAlias){
-        $tableName = DateBaseFieldsWrapper::$tables[$tableAlias];
-        $tableFields = DateBaseFieldsWrapper::getTabelsFieldsNames()[$tableName];
+        $tableName = DataBaseFieldsWrapper::$tables[$tableAlias];
+        $tableFields = DataBaseFieldsWrapper::getTabelsFieldsNames()[$tableName];
 
-        return new DateBaseFieldsWrapper($tableName, $tableFields);
+        return new DataBaseFieldsWrapper($tableName, $tableFields);
     }
 
     private static function getTabelsFieldsNames(){
         return [
-            'Biblioteka.Adres' => DateBaseFieldsWrapper::$adres,
-            'Biblioteka.Poczta' => DateBaseFieldsWrapper::$poczta,
-            'Biblioteka.Wiadomosc' => DateBaseFieldsWrapper::$wiadomosc,
-            'Biblioteka.Uzytkownik' => DateBaseFieldsWrapper::$uzytkownik,
-            'Biblioteka.Naleznosc' => DateBaseFieldsWrapper::$naleznosc,
-            'Biblioteka.Rodzaj_uzytkownika' => DateBaseFieldsWrapper::$rodzajUzytkownika,
-            'Biblioteka.Komentarz' => DateBaseFieldsWrapper::$komentarz,
-            'Biblioteka.Avatar' => DateBaseFieldsWrapper::$avatar,
-            'Biblioteka.Wypozyczona_ksiazka' => DateBaseFieldsWrapper::$wypozyczonaKsiazka,
-            'Biblioteka.Ksiazka' => DateBaseFieldsWrapper::$ksiazka,
-            'Biblioteka.Ksiazka_Autor' => DateBaseFieldsWrapper::$ksiazkaAutor,
-            'Biblioteka.Wydawnictwo' => DateBaseFieldsWrapper::$wydawnictwo,
-            'Biblioteka.Autor' => DateBaseFieldsWrapper::$autor,
-            'Biblioteka.Rodzaj_powiazania' => DateBaseFieldsWrapper::$rodzajPowiazania
+            'Biblioteka.Adres' => DataBaseFieldsWrapper::$adres,
+            'Biblioteka.Poczta' => DataBaseFieldsWrapper::$poczta,
+            'Biblioteka.Wiadomosc' => DataBaseFieldsWrapper::$wiadomosc,
+            'Biblioteka.Uzytkownik' => DataBaseFieldsWrapper::$uzytkownik,
+            'Biblioteka.Naleznosc' => DataBaseFieldsWrapper::$naleznosc,
+            'Biblioteka.Rodzaj_uzytkownika' => DataBaseFieldsWrapper::$rodzajUzytkownika,
+            'Biblioteka.Komentarz' => DataBaseFieldsWrapper::$komentarz,
+            'Biblioteka.Avatar' => DataBaseFieldsWrapper::$avatar,
+            'Biblioteka.Wypozyczona_ksiazka' => DataBaseFieldsWrapper::$wypozyczonaKsiazka,
+            'Biblioteka.Ksiazka' => DataBaseFieldsWrapper::$ksiazka,
+            'Biblioteka.Ksiazka_Autor' => DataBaseFieldsWrapper::$ksiazkaAutor,
+            'Biblioteka.Wydawnictwo' => DataBaseFieldsWrapper::$wydawnictwo,
+            'Biblioteka.Autor' => DataBaseFieldsWrapper::$autor,
+            'Biblioteka.Rodzaj_powiazania' => DataBaseFieldsWrapper::$rodzajPowiazania
         ];
     }
     private static $tables = [

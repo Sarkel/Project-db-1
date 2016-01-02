@@ -109,3 +109,9 @@ CREATE OR REPLACE FUNCTION Biblioteka.debet_by_user(INT) RETURNS TABLE(f1 INT, f
 		OR k.Ksiazka_ID = n.Ksiazka 
 	ORDER BY n.Wartosc DESC;
 ' LANGUAGE sql;
+
+CREATE OR REPLACE FUNCTION Biblioteka.login_user(TEXT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT, f4 TEXT, f5 TEXT, f6 TEXT) AS '
+	SELECT u.Uzytkownik_ID, u.Email, u.Haslo, u.Pwd_seed, ru.Nazwa, av.Url 
+	FROM Biblioteka.Uzytkownik AS u, Biblioteka.Avatar AS av, Biblioteka.Rodzaj_uzytkownika AS ru 
+	WHERE u.Email = $1 AND u.Aktywny = true;
+' LANGUAGE sql;

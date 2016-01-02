@@ -76,27 +76,30 @@ class ApiModel
         return null;
     }
     public function run(){
-        $comparedValues = $this->compareEndpoints();
-        if($comparedValues){
-            $toRun = $comparedValues->endpointDescription;
-            $class = $toRun['namespace'] . '\\' . $toRun['class'];
-            $method = $toRun['method'];
-            $hasParams = $toRun['hasParams'];
-            $httpMethod = $toRun['httpMethod'];
-            $params = [];
-            if($hasParams) $params['UriParams'] = $comparedValues->params;
-            if($httpMethod === 'POST' || $httpMethod === 'PUT') $params['BodyParams'] = $this->bodyParams;
-            if(count($params) === 0){
-                $response = $class::$method();
-            } else {
-                $response = $class::$method($params);
+        if(!AuthorizationModel::checkSession()){
+            $response = new ResponseWrapper(false, 'Session Expired');
+        } else {
+            $comparedValues = $this->compareEndpoints();
+            if($comparedValues){
+                $toRun = $comparedValues->endpointDescription;
+                $class = $toRun['namespace'] . '\\' . $toRun['class'];
+                $method = $toRun['method'];
+                $hasParams = $toRun['hasParams'];
+                $httpMethod = $toRun['httpMethod'];
+                $params = [];
+                if($hasParams) $params['UriParams'] = $comparedValues->params;
+                if($httpMethod === 'POST' || $httpMethod === 'PUT') $params['BodyParams'] = $this->bodyParams;
+                if(count($params) === 0){
+                    $response = $class::$method();
+                } else {
+                    $response = $class::$method($params);
+                }
+            } else{
+                $response = new ResponseWrapper(false, 'No method match.');
             }
-        } else{
-            $response = new ResponseWrapper(false, 'No method match.');
         }
 
         $this->createResponse($response);
-        //$this->createResponse(new ResponseWrapper(false, 'No method match.', $this->bodyParams));
     }
 
     private function createResponse(ResponseWrapper $response){

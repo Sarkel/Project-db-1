@@ -19,11 +19,11 @@ use App\Exceptions\DateBaseConnectionException;
 use App\Exceptions\CustomException;
 use App\Exceptions\DateBaseDMLException;
 use App\Exceptions\DateBaseSelectException;
-use App\Wrappers\DateBaseSettingsWrapper;
-use App\Wrappers\DateBaseFieldsWrapper;
+use App\Wrappers\DataBaseSettingsWrapper;
+use App\Wrappers\DataBaseFieldsWrapper;
 use App\Wrappers\WhereConditionWrapper;
-use App\Wrappers\DateBaseResponseWrapper;
-class DateBase
+use App\Wrappers\DataBaseResponseWrapper;
+class DataBase
 {
     private $settings;
     private $db;
@@ -32,7 +32,7 @@ class DateBase
     {
         try {
             $content = file_get_contents('./Mocks/DateBaseSettings.json');
-            $this->settings = new DateBaseSettingsWrapper(json_decode($content, true));
+            $this->settings = new DataBaseSettingsWrapper(json_decode($content, true));
             $this->db = $this->connect();
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
@@ -62,7 +62,7 @@ class DateBase
         try {
             $fields = '';
             $values = '';
-            $tableDescription = DateBaseFieldsWrapper::getDateBaseProperties($tableAlias);
+            $tableDescription = DataBaseFieldsWrapper::getDateBaseProperties($tableAlias);
             $tableName = $tableDescription->tableName;
             $tableFields = $tableDescription->tableFields;
             foreach ($params as $key => $value) {
@@ -90,7 +90,7 @@ class DateBase
     {
         if (!$this->isValidString($tableAlias)) throw new CustomException('Invalid input params.');
         try {
-            $tableDescription = DateBaseFieldsWrapper::getDateBaseProperties($tableAlias);
+            $tableDescription = DataBaseFieldsWrapper::getDateBaseProperties($tableAlias);
             $tableName = $tableDescription->tableName;
             $tableFields = $tableDescription->tableFields;
             $whereString = $this->setWhereCondition($whereConditions, $tableFields);
@@ -113,7 +113,7 @@ class DateBase
     {
         if(!$this->isValidString($tableAlias) || !$this->isValidArray($setParams)) throw new CustomException('Invalid input params.');
         try {
-            $tableDescription = DateBaseFieldsWrapper::getDateBaseProperties($tableAlias);
+            $tableDescription = DataBaseFieldsWrapper::getDateBaseProperties($tableAlias);
             $tableName = $tableDescription->tableName;
             $tableFields = $tableDescription->tableFields;
             $whereString = $this->setWhereCondition($whereConditions, $tableFields);
@@ -143,7 +143,7 @@ class DateBase
     public function select($tableAlias, $fields = null, $whereCondition = null, $otherOptions = null)
     {
         try {
-            $tableDescription = DateBaseFieldsWrapper::getDateBaseProperties($tableAlias);
+            $tableDescription = DataBaseFieldsWrapper::getDateBaseProperties($tableAlias);
             $tableName = $tableDescription->tableName;
             $tableFields = $tableDescription->tableFields;
             $fieldsString = '';
@@ -159,7 +159,7 @@ class DateBase
             }
             $result = [];
             foreach($this->db->query("SELECT $fieldsString FROM $tableName $whereCondition $otherOptions") as $row){
-                $rowWrapper = new DateBaseResponseWrapper();
+                $rowWrapper = new DataBaseResponseWrapper();
                 foreach($tableFields as $alias => $original){
                     foreach($row as $key => $value){
                         if($original === $key) $rowWrapper->setProperty($alias, $value);
@@ -168,6 +168,31 @@ class DateBase
                 array_push($result, $rowWrapper);
             }
             return $result;
+        } catch (PDOException $e) {
+            throw new DateBaseSelectException($e->getMessage(), $e->getCode(), $e);
+        } catch (Exception $e) {
+            throw new CustomException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    public function execute($fields, $functionName, $param = null){
+        if(!$this->isValidArray($fields) || !$this->isValidString($functionName)) throw new CustomException('Invalid input params.');
+        try {
+            $query = "SELECT Biblioteka.$functionName";
+            if($param === null) {
+                $query .= "()";
+            } else {
+                $query .= "($param)";
+            }
+            $resp = [];
+            foreach($this->db->query($query) as $row){
+                $el = new DataBaseResponseWrapper();
+                for($i=0; $i<count($fields); $i++){
+                    $el->setProperty($fields[$i], $row[$i]);
+                }
+                array_push($resp, $el);
+            }
+            return $resp;
         } catch (PDOException $e) {
             throw new DateBaseSelectException($e->getMessage(), $e->getCode(), $e);
         } catch (Exception $e) {

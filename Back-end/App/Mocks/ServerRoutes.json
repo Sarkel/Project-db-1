@@ -7,5 +7,23 @@
     "httpMethod": "GET",
     "endpoint": "/books",
     "description": "Get list of all books"
+  },
+  {
+    "namespace": "App\\Models",
+    "class": "AuthorizationModel",
+    "method": "logIn",
+    "hasParams": true,
+    "httpMethod": "POST",
+    "endpoint": "/login",
+    "description": "Login user into app."
+  },
+  {
+    "namespace": "App\\Models",
+    "class": "AuthorizationModel",
+    "method": "logOut",
+    "hasParams": false,
+    "httpMethod": "GET",
+    "endpoint": "/logout",
+    "description": "Logout user."
   }
 ]

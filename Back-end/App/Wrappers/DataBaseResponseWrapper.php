@@ -9,7 +9,7 @@
 namespace App\Wrappers;
 
 
-class DateBaseResponseWrapper
+class DataBaseResponseWrapper
 {
     public function setProperty($fieldName, $fieldValue){
         $this->{$fieldName} = $fieldValue;

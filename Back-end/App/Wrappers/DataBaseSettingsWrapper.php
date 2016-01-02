@@ -7,7 +7,7 @@
  */
 
 namespace App\Wrappers;
-class DateBaseSettingsWrapper
+class DataBaseSettingsWrapper
 {
     function __construct($_settings){
         $this->dbName = $_settings['dateBaseName'];
