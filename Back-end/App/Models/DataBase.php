@@ -175,17 +175,11 @@ class DataBase
         }
     }
 
-    public function execute($fields, $functionName, $param = null){
-        if(!$this->isValidArray($fields) || !$this->isValidString($functionName)) throw new CustomException('Invalid input params.');
+    public function executeView($viewName, $fields){
+        if(!$this->isValidArray($fields) || !$this->isValidString($viewName)) throw new CustomException('Invalid input params.');
         try {
-            $query = "SELECT Biblioteka.$functionName";
-            if($param === null) {
-                $query .= "()";
-            } else {
-                $query .= "($param)";
-            }
             $resp = [];
-            foreach($this->db->query($query) as $row){
+            foreach($this->db->query("SELECT * FROM Biblioteka.$viewName") as $row){
                 $el = new DataBaseResponseWrapper();
                 for($i=0; $i<count($fields); $i++){
                     $el->setProperty($fields[$i], $row[$i]);
@@ -200,6 +194,27 @@ class DataBase
         }
     }
 
+    public function executeFunction($function, $fields, $param = null){
+        if(!$this->isValidArray($fields) || !$this->isValidString($function)) throw new CustomException('Invalid input params.');
+        try {
+            $resp = [];
+            foreach($this->db->query("SELECT Biblioteka.$function($param)") as $row){
+                $el = new DataBaseResponseWrapper();
+                $row = str_replace('(', '', $row[$function]);
+                $row = str_replace(')', '', $row);
+                $row = explode(',', $row);
+                for($i=0; $i<count($fields); $i++){
+                    $el->setProperty($fields[$i], $row[$i]);
+                }
+                array_push($resp, $el);
+            }
+            return $resp;
+        } catch (PDOException $e) {
+            throw new DateBaseSelectException($e->getMessage(), $e->getCode(), $e);
+        } catch (Exception $e) {
+            throw new CustomException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
     private function isValidString($string)
     {
         return $string != null && is_string($string);

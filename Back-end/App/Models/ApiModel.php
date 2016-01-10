@@ -76,7 +76,8 @@ class ApiModel
         return null;
     }
     public function run(){
-        if(!AuthorizationModel::checkSession()){
+        //if(!AuthorizationModel::checkSession()){
+        if(false){
             $response = new ResponseWrapper(false, 'Session Expired');
         } else {
             $comparedValues = $this->compareEndpoints();

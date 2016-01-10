@@ -25,5 +25,59 @@
     "httpMethod": "GET",
     "endpoint": "/logout",
     "description": "Logout user."
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "KsiazkaModel",
+    "method": "getSearchBookResult",
+    "hasParams": true,
+    "httpMethod": "GET",
+    "endpoint": "/books/search/{searchParam}",
+    "description": "Get list of all searched books"
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "KsiazkaModel",
+    "method": "getBookDetail",
+    "hasParams": true,
+    "httpMethod": "GET",
+    "endpoint": "/books/id/{bookId}",
+    "description": "Get book details"
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "KsiazkaModel",
+    "method": "addBook",
+    "hasParams": true,
+    "httpMethod": "POST",
+    "endpoint": "/books/add",
+    "description": "Add new book"
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "KsiazkaModel",
+    "method": "changeBook",
+    "hasParams": true,
+    "httpMethod": "PUT",
+    "endpoint": "/books/id/{bookId}",
+    "description": "Change details of existed book"
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "KsiazkaModel",
+    "method": "deleteBook",
+    "hasParams": true,
+    "httpMethod": "DELETE",
+    "endpoint": "/books/id/{bookId}",
+    "description": "Remove book"
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "UzytkownikModel",
+    "method": "getAllUsers",
+    "hasParams": false,
+    "httpMethod": "GET",
+    "endpoint": "/users",
+    "description": "Get all users."
   }
 ]

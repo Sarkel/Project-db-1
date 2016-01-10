@@ -1,5 +1,5 @@
 CREATE VIEW Biblioteka.all_books AS 
-	SELECT k.Ksiazka_ID, k.Tytul, a.Avatar_ID, a.Url
+	SELECT k.Ksiazka_ID, k.Tytul, a.Url, Biblioteka.avg_star(k.Ksiazka_ID) 
 	FROM Biblioteka.Ksiazka AS k, Biblioteka.Avatar AS a 
 	WHERE k.Wypozyczona = false AND a.Avatar_ID = k.Avatar;
 

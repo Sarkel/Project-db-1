@@ -10,7 +10,7 @@
 namespace App\Wrappers;
 class ResponseWrapper
 {
-    public function __construct($success, $msg, $data = null){
+    public function __construct($success, $msg=null, $data = null){
         $this->success = $success;
         $this->msg = $msg;
         if(!is_null($data)) $this->data = $data;

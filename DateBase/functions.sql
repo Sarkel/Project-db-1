@@ -1,8 +1,9 @@
 --get avarage star number
-CREATE OR REPLACE FUNCTION Biblioteka.avg_star() RETURNS NUMERIC AS '
+CREATE OR REPLACE FUNCTION Biblioteka.avg_star(INT) RETURNS NUMERIC AS '
 	SELECT avg(kom.Ilosc_gwiazdek) 
 	FROM Biblioteka.Ksiazka AS k, Biblioteka.Komentarz AS kom 
-	WHERE k.Ksiazka_ID = kom.Ksiazka;
+	WHERE k.Ksiazka_ID = kom.Ksiazka
+		AND k.Ksiazka_ID = $1;
 ' LANGUAGE sql;
 
 --get entire debet for user
@@ -14,31 +15,47 @@ CREATE OR REPLACE FUNCTION Biblioteka.get_debet() RETURNS NUMERIC(10, 2) AS '
 
 --search books by title, autor first and last name
 CREATE OR REPLACE FUNCTION Biblioteka.search_books(TEXT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT, f4 NUMERIC) AS '
-	SELECT k.Ksiazka_ID, k.Tytul, av.Url, Biblioteka.avg_star() 
+	SELECT k.Ksiazka_ID, k.Tytul, av.Url, Biblioteka.avg_star(k.Ksiazka_ID)
 	FROM Biblioteka.Ksiazka AS k, Biblioteka.Avatar AS av, Biblioteka.Ksiazka_Autor AS ka, Biblioteka.Autor AS a 
 	WHERE k.Wypozyczona = false 
-		AND av.Avatar_ID = k.Avatar 
-		AND ka.Ksiazka = k.Ksiazka_ID 
-		AND ka.Autor = a.Autor_ID 
+		AND (av.Avatar_ID = k.Avatar 
+			OR ka.Ksiazka = k.Ksiazka_ID 
+			OR ka.Autor = a.Autor_ID ) 
 		AND (k.Tytul LIKE $1 || ''%''  OR a.Imie LIKE $1 || ''%'' OR a.Nazwisko LIKE $1 || ''%'') 
 	ORDER BY k.Tytul;
 ' LANGUAGE sql;
 
 --get detail information about selected book
-CREATE OR REPLACE FUNCTION Biblioteka.detail_book(INT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT, f4 TEXT, f5 TEXT, f6 TEXT, f7 NUMERIC, f8 TEXT, f9 TEXT, f10 TEXT) AS '
-	SELECT k.Ksiazka_ID, k.Tytul, k.Rok_wydania, k.isbn, av.Url, wy.Nazwa, Biblioteka.avg_star(), a.Imie, a.Nazwisko, rp.Nazwa
-	FROM Biblioteka.Ksiazka AS k, Biblioteka.Avatar AS av, Biblioteka.Wydawnictwo AS wy, Biblioteka.Ksiazka_Autor AS ka, Biblioteka.Autor AS a, Biblioteka.Rodzaj_powiazania as rp 
-	WHERE k.Ksiazka_ID = $1
+CREATE OR REPLACE FUNCTION Biblioteka.detail_book(INT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT, f4 TEXT, f5 TEXT, f6 NUMERIC) AS '
+	SELECT k.Ksiazka_ID, k.Tytul, k.Rok_wydania, k.isbn, av.Url, Biblioteka.avg_star(k.Ksiazka_ID)
+	FROM Biblioteka.Ksiazka AS k, Biblioteka.Avatar AS av, Biblioteka.Wydawnictwo AS wy 
+	WHERE k.Ksiazka_ID = $1 
 		AND av.Avatar_ID = k.Avatar 
+		AND wy.Wydawnictwo_ID = k.Wydawnictwo;
+' LANGUAGE sql; 
+
+--get all authors for selected book
+CREATE OR REPLACE FUNCTION Biblioteka.book_authors(INT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT, f4 TEXT, f5 TEXT) AS '
+	SELECT a.Autor_ID, a.Imie, a.Nazwisko, a.Kraj_pochodzenia, rp.Nazwa 
+	FROM Biblioteka.Ksiazka AS k, Biblioteka.Ksiazka_Autor AS ka, Biblioteka.Autor AS a, Biblioteka.Rodzaj_powiazania AS rp 
+	WHERE k.Ksiazka_ID = $1 
 		AND ka.Ksiazka = k.Ksiazka_ID 
 		AND ka.Autor = a.Autor_ID 
-		AND wy.Wydawnictwo_ID = k.Wydawnictwo 
-		AND ka.Rodzaj_powiazania = rp.Rodzaj_powiazania_ID;
-' LANGUAGE sql; 
+		AND rp.Rodzaj_powiazania_ID = ka.Rodzaj_powiazania 
+	ORDER BY a.Nazwisko;
+' LANGUAGE sql;
+
+--get all authors for selected book
+CREATE OR REPLACE FUNCTION Biblioteka.book_wyd(INT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT) AS '
+	SELECT wy.Wydawnictwo_ID, wy.Nazwa, Kraj_pochodzenia 
+	FROM Biblioteka.Wydawnictwo AS wy, Biblioteka.Ksiazka AS k  
+	WHERE k.Ksiazka_ID = $1 
+		AND k.Wydawnictwo = wy.Wydawnictwo_ID;
+' LANGUAGE sql;
 
 --get all books by author
 CREATE OR REPLACE FUNCTION Biblioteka.books_by_author(INT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT, f4 TEXT, f5 NUMERIC) AS '
-	SELECT k.Ksiazka_ID, k.Tytul, av.Url, rp.Nazwa, Biblioteka.avg_star() 
+	SELECT k.Ksiazka_ID, k.Tytul, av.Url, rp.Nazwa, Biblioteka.avg_star(k.Ksiazka_ID) 
 	FROM Biblioteka.Ksiazka AS k, Biblioteka.Avatar AS av, Biblioteka.Ksiazka_Autor AS ka, Biblioteka.Autor AS a, Biblioteka.Rodzaj_powiazania as rp 
 	WHERE a.Autor_ID = $1 
 		AND av.Avatar_ID = k.Avatar 
@@ -50,7 +67,7 @@ CREATE OR REPLACE FUNCTION Biblioteka.books_by_author(INT) RETURNS TABLE(f1 INT,
 
 --get all books by wydawnictwo
 CREATE OR REPLACE FUNCTION Biblioteka.books_by_wydawnictwo(INT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT, f4 NUMERIC) AS '
-	SELECT k.Ksiazka_ID, k.Tytul, av.Url, Biblioteka.avg_star() 
+	SELECT k.Ksiazka_ID, k.Tytul, av.Url, Biblioteka.avg_star(k.Ksiazka_ID) 
 	FROM Biblioteka.Ksiazka AS k, Biblioteka.Avatar AS av, Wydawnictwo AS wy 
 	WHERE wy.Wydawnictwo_ID = $1 
 		AND av.Avatar_ID = k.Avatar 
