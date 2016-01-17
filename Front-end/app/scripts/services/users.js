@@ -88,15 +88,24 @@ angular.module('libraryApp')
 					avatar: 'test',
 					nazwisko: 'test',
 					imie: 'test',
-					aktive: true
+					aktywny: true
 				},{
 					id: 1,
 					email: 'test@test.com',
-					typ: 'ADMIN',
+					typ: 'UZYTKOWNIK',
 					avatar: 'test',
 					nazwisko: 'test',
 					imie: 'test',
-					aktive: true
+					aktywny: false
+				},
+				{
+					id: 1,
+					email: 'test@test.com',
+					typ: 'BIBLIOTEKARZ',
+					avatar: 'test',
+					nazwisko: 'test',
+					imie: 'test',
+					aktywny: false
 				}
 			]
 		});

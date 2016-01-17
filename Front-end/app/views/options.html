@@ -1,0 +1,23 @@
+<div>
+	<input type="text" pleaceholder="Szukaj" ng-modal="searchResult" class="form-control" />
+	<div>
+		<div ng-repeat="user in users" ng-click="select(user.id)" ng-show="userType || user.typ === 'UZYTKOWNIK'">
+			<img ng-src="user.avatar"/>
+			<div>
+				<label>Imię: </label><span>{{user.imie}}</span>
+			</div>
+			<div>
+				<label>Nazwisko: </label><span>{{user.Nazwisko}}</span>
+			</div>
+			<div>
+				<label>E-mail: </label><span>{{user.email}}</span>
+			</div>
+			<div>
+				<label>Typ: </label><span>{{user.typ}}</span>
+			</div>
+			<div>
+				<label>Aktywny: </label><span><i class="fa" ng-class="{'fa-check-square-o': user.aktywny, 'fa-square-o': !user.aktywny}"></i></span>
+			</div>
+		</div>
+	</div>
+</div>

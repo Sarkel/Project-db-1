@@ -58,6 +58,10 @@ angular
         templateUrl: 'views/detailUser.html',
         controller: 'DetailuserCtrl'
       })
+      .when('/options/:type', {
+        templateUrl: 'views/options.html',
+        controller: 'OptionsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

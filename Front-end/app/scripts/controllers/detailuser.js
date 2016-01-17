@@ -13,6 +13,7 @@ angular.module('libraryApp')
 		$location.path('/logowanie');
 	}
 
+    $scope.userId = $routeParams.id;
     var listenerUser = $scope.$on('contactDialogEvent', function (event, result) {
         $scope.userDialogId = result.dialogId;
     });
@@ -27,6 +28,8 @@ angular.module('libraryApp')
         $scope.searchAddress = '';
         $scope.addresses = [];
     };
+
+    $scope.showComments = false;
 
     $scope.update = function (){
         Users.updateUser($scope.editUser, $scope.editAdres).then(function (result){

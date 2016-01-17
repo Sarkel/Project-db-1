@@ -12,6 +12,7 @@ angular.module('libraryApp')
   	$scope.detailBook = {};
   	$scope.colapsedAuthors = true;
   	$scope.colapsedWyd = true;
+    $scope.showComments = false;
   	$scope.selectAuthor = function (id){
   		$location.path('/authors/' + id);
   	};

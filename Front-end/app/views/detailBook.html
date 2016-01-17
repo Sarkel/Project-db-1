@@ -24,4 +24,21 @@
 			</div>
 		</div>
 	</div>
+
+	<!--comments-->
+	<div>
+		<div ng-click="!showComments">
+			<span>Komentarze</span>
+		</div>
+		<div ng-show="showComments">
+			<div ng-controller="CommentsCtrl">
+				<div ng-repeat="comment in comments">
+					<span>{{comment.user.imie}}</span>
+					<span>{{comment.user.nazwisko}}</span>
+					<span>{{comment.data}}</span>
+					<div>{{comment.tekst}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

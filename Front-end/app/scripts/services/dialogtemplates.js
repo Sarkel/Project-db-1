@@ -41,6 +41,8 @@ angular.module('libraryApp')
     '<input type="text" class="form-control" ng-model="editUser.imie" placeholder="Imię"/>' +
     '<input type="text" class="form-control" ng-model="editUser.komorka" placeholder="Telefon komórkowy"/>' +
     '<input type="text" class="form-control" ng-model="editUser.stacjonarny" placeholder="Telefon stacjonarny"/>' +
+    '<input type="text" class="form-control" ng-model="editUser.typ" placeholder="Typ" ng-show="isAdmin && userId != \'me\'">' +
+    '<label ng-show="isAdmin && userId != \'me\'">Aktywny: </label><input type="checkbox" ng-model="editUser.typ"/ ng-show="isAdmin && userId != \'me\'">' +
   '</div>' +
   '<div>' +
         '<input type="text" class="form-control" ng-model="editAdres.ulica" placeholder="Ulica"/>' +
