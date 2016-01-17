@@ -1,0 +1,27 @@
+<div>
+	<input type="Button" value="Wypożycz" ng-click="borrowBook(detailBook)" class="btn btn-default" ng-show="isLogged"/>
+	<div>
+		<img ng-src="detailBook.avatarUrl"/>
+		<label>Tytul: </label><span>{{detailBook.tytul}}</span>
+		<label>ISBN: </label><span>{{detailBook.isbn}}</span>
+		<span>{{detailBook.stars}}</span>
+	</div>
+	<div>
+		<span ng-click="!colapsedWyd">Wyd</span>
+		<div ng-show="colapsedWyd" ng-click="selectWyd(detailBook.book_wyd.id)">
+			<label>Nazwa: </label><span>{{detailBook.book_wyd.Nazwa}}</span>
+			<label>kraj: </label><span>{{detailBook.book_wyd.kraj}}</span>
+		</div>
+	</div>
+	<div>
+		<span ng-click="!colapsedAuthors">author</span>
+		<div ng-show="colapsedAuthors">
+			<div ng-repeat="author in detailBook.authors" ng-click="selectAuthor(author.id)">
+				<label>Imie: </label><span>{{author.imie}}</span>
+				<label>nazwisko: </label><span>{{author.nazwisko}}</span>
+				<label>kraj: </label><span>{{author.kraj}}</span>
+				<label>powiazanie: </label><span>{{author.nazwaPowiazania}}</span>
+			</div>
+		</div>
+	</div>
+</div>

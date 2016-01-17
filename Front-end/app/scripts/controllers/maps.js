@@ -8,7 +8,7 @@
  * Controller of the libraryApp
  */
 angular.module('libraryApp')
-  .controller('MapsCtrl', ['$scope', 'ngDialog',function ($scope, ngDialog) {
+  .controller('MapsCtrl', ['$scope', function ($scope) {
     var listener = $scope.$on('mapDialogEvent', function (event, result) {
     	$scope.dialogId = result.dialogId;
     });

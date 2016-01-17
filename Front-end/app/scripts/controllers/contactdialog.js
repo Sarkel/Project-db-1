@@ -10,7 +10,7 @@
 angular.module('libraryApp')
   .controller('ContactdialogCtrl',['$scope', 'ngDialog', function ($scope, ngDialog) {
     
-    var listener = $scope.$on('contactDialogEvent', function (event, result) {
+    var listener = $scope.$on('editUser', function (event, result) {
     	$scope.dialogId = result.dialogId;
     });
 

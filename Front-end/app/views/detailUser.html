@@ -1,0 +1,25 @@
+<div>
+	<input type="button" value="Wyloguj" ng-click="logout()" class="btn btn-default"/>
+	<input type="button" value="Edytuj" ng-click="openEditUserDialog()" class="btn btn-default"/>
+	<input type="button" value="Opcje administracyjne" ng-click="options(true)" class="btn btn-default" ng-show="isAdmin"/>
+	<input type="button" value="Opcje bibliotekarza" ng-click="options(false)" class="btn btn-default" ng-show="isLibrarian"/>
+	<div>
+		<img ng-src="currectUser.avatar"/>
+		<div>
+			<label>E-mail: </label><span>{{currectUser.email}}</span>
+			<label>Nazwisko: </label><span>{{currectUser.nazwisko}}</span>
+			<label>Imie: </label><span>{{currectUser.imie}}</span>
+			<label>Telefon komórkowy: </label><span>{{currectUser.komorka}}</span>
+			<label>Telefon stacjonarny: </label><span>{{currectUser.stacjonarny}}</span>
+			<label>Opłaty: </label><span>{{currectUser.debet | currency : ""}} PLN</span>
+		</div>
+		<div>
+			<label>Ulica: </label><span>{{currectUser.ulica}}</span>
+			<label>Numer domu: </label><span>{{currectUser.numerDomu}}</span>
+			<label>Numer mieszkania: </label><span>{{currectUser.numerMieszkania}}</span>
+			<label>Kod pocztowy: </label><span>{{currectUser.kodPocztowy}}</span>
+			<label>Miejscowosc: </label><span>{{currectUser.miejscowosc}}</span>
+			<label>Kraj: </label><span>{{currectUser.kraj}}</span>
+		</div>
+	</div>
+</div>

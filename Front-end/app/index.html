@@ -15,6 +15,7 @@
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/app.css -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="styles/app.css">
         <!-- endbuild -->
     </head>
@@ -24,7 +25,7 @@
         <![endif]-->
         <!-- Add your site or application content here -->
         
-        <ng-include src="'./templates/pageTemplate.html'"></ng-include>
+        <ng-include src="'views/templates/pageTemplate.html'"></ng-include>
         <script src="https://maps.googleapis.com/maps/api/js"></script>
         <!--cookies information block-->
 
@@ -77,6 +78,15 @@
         <script src="scripts/controllers/contactdialog.js"></script>
         <script src="scripts/services/dialogtemplates.js"></script>
         <script src="scripts/controllers/maps.js"></script>
+        <script src="scripts/services/books.js"></script>
+        <script src="scripts/controllers/detailbook.js"></script>
+        <script src="scripts/controllers/detailauthor.js"></script>
+        <script src="scripts/controllers/detailwyd.js"></script>
+        <script src="scripts/services/users.js"></script>
+        <script src="scripts/controllers/detailuser.js"></script>
+        <script src="scripts/controllers/users.js"></script>
+        <script src="scripts/services/address.js"></script>
+        <script src="scripts/controllers/error.js"></script>
         <!-- endbuild -->
     </body>
 </html>

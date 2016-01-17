@@ -1,1 +1,7 @@
-{{search}}
+<div>
+	<div ng-repeat="book in books" ng-click="selectBook(book.id)">
+		<div>{{book.tytul}}</div>
+		<div>{{book.stars}}</div>
+		<img ng-src="book.avatarUrl"/>
+	</div>
+</div>

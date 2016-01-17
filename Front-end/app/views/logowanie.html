@@ -8,24 +8,9 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12 col-md-8 input-group">
-			<input type="password" placeholder="Hasło" class="form-control" ng-model="currentUser.password"/>
-			<span class="input-group-addon" ng-mousedown="showPwd()">
-				<i class="fa fa-eye"></i>
-			</span>
-		</div>
+		<input type="password" placeholder="Hasło" class="form-control" ng-model="currentUser.password"/>
 	</div>
 	<div class="row">
 		<input type="submit" value="Zaloguj" class="btn btn-success" ng-click="login()"/>
-	</div>
-</div>
-
-<div class="container-fluid logowanie-main" ng-if="isLogged">
-	<div ng-repeat="(key, value) in user">
-		<div class="row">
-			<span class="col-xs-6 col-md-4" ng-bind="key"></span>
-			<span class="col-xs-6 col-md-4" ng-bind="value"></span>
-			<input class="form-control col-xs-6 col-md-4" ng-bind="value" type="text"/>
-		</div>
 	</div>
 </div>

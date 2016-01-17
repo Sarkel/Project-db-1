@@ -1,1 +1,11 @@
-koszyk
+<div ng-hide="isEmpty">
+	<input type="Button" ng-click="clearBasket()" value="Opróżnij koszyk" class="btn btn-default" />
+	<input type="Button" ng-click="borrow()" value="Wypożycz" class="btn btn-default" ng-show="isLogged"/>
+	<div ng-repeat="book in selectedToBorrow">
+		<img ng-src="book.avatarUrl"/>
+		<div>{{book.tytul}}</div>
+		<div>{{book.stars}}</div>
+		<input type="button" value="Usuń" ng-click="removeBook(book.id)" class="btn btn-default"/>
+	</div>
+</div>
+<div ng-hide="!isEmpty">Twój koszyk jest pusty</div>
