@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name Game.Comments
+ * @name libraryApp.Comments
  * @description
  * # Comments
- * Service in the Game.
+ * Service in the libraryApp.
  */
-angular.module('Game')
+angular.module('libraryApp')
   .service('Comments', ['$rootScope', '$http', '$q', function ($rootScope, $http, $q) {
     var url = $rootScope.url;
 
