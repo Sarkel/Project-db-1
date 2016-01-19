@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 19.01.2016
  * Time: 04:08
  */
@@ -15,6 +15,11 @@ use Exception;
 
 class KomentarzModel
 {
+    /**
+     * @param $bookId
+     * @return ResponseWrapper
+     * @description Metoda pobiera wszystkie komentarze dla wybranej ksi¹¿ki
+     */
     public static function getAllCommentsByBook($bookId){
         try{
             $uriParam = $bookId['UriParams'][0];
@@ -26,6 +31,11 @@ class KomentarzModel
         }
     }
 
+    /**
+     * @param $userId
+     * @return ResponseWrapper
+     * @description Metoda pobiera wszystkie komentarze dla wybranego u¿ytkownika
+     */
     public static function getAllCommentsByUser($userId){
         try{
             $uriParam = $userId['UriParams'][0];
@@ -37,6 +47,11 @@ class KomentarzModel
         }
     }
 
+    /**
+     * @param $comment
+     * @return ResponseWrapper
+     * @description Metoda tworzy komentarz
+     */
     public static function createComment($comment){
         try{
             $bodyParams = $comment['BodyParams'][0];

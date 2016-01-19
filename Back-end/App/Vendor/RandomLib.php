@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 30.12.2015
  * Time: 00:02
  */
@@ -12,6 +12,9 @@ namespace App\Vendor;
 
 class RandomLib
 {
+    /**
+     *@description ³aduje biblioteki do generowania losowych liczb
+     */
     public static function addRandomLibrary(){
         $libraryRoot = dirname(__FILE__);
         require_once "$libraryRoot/RandomLib/random.php";

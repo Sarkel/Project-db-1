@@ -9,12 +9,9 @@
  */
 angular.module('libraryApp')
   .service('Address', ['$rootScope', '$http', function ($rootScope, $http) {
-    var url = $rootScope.url;
+    var url = 'App/api.php';
 
     this.searchAdress = function (searchParam){
-    	return $http({
-    		url: url + 'adress/search/' + searchParam,
-    		method: 'GET'
-    	});
+    	return $http.get(url + 'adress/search/' + searchParam);
     };
   }]);

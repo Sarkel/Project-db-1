@@ -9,39 +9,26 @@
  */
 angular.module('libraryApp')
   .service('Books',['$http', '$rootScope', function ($http, $rootScope) {
-    var url = $rootScope.url;
+    var url = 'App/api.php';
     this.getAll = function (){
-    	return $http({
-    		urlL: url + '/books',
-    		method: 'GET'
-    	});
+    	return $http.get(url + '/books');
     };
 
     this.getSelected = function (id) {
-    	return $http({
-    		urlL: url + '/books/id/' + id,
-    		method: 'GET'
-    	});
+    	return $http.get(url + '/books/id/' + id);
     };
 
     this.getSearchResults = function (serachParam){
-      return $http({
-        urlL: url + '/books/search/' + serachParam,
-        method: 'GET'
-      });
+      return $http.get(url + '/books/search/' + serachParam);
     };
 
     this.borrowBooks = function (userId, booksId){
       var today = new Date(Date.now()).toUTCString();
-      return $http({
-        url: url + '/books/borrow',
-        method: 'POST',
-        data: {
+      return $http.post(url + '/books/borrow', {
           uzytkownik: userId,
           ksiazka: booksId,
           dataWypozyczenia: today,
           dataOddania: ''
-        }
-      });
+        });
     };
   }]);

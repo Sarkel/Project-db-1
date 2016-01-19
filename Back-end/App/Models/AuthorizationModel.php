@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 30.12.2015
  * Time: 00:27
  */
@@ -16,8 +16,18 @@ use Exception;
 class AuthorizationModel
 {
     private $tokenLength = 15;
+
     private $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
     private static $cookieName = 'Library';
+
+    /**
+     * @return string
+     * @throws Exception
+     * @throws \Error
+     * @throws \TypeError
+     * @description metoda tworzy seurity token ko¿ystaj¹c z RandomLib
+     */
     private function getSecurityToken()
     {
         RandomLib::addRandomLibrary();
@@ -29,8 +39,16 @@ class AuthorizationModel
         return $str;
     }
 
+    /**
+     *
+     */
     private function __construct(){}
 
+    /**
+     * @param $data
+     * @return ResponseWrapper
+     * @description metoda odpowiada za logowanie do servisu
+     */
     public static function logIn($data){
         $auth = new AuthorizationModel();
         if(AuthorizationModel::checkSession()) {
@@ -65,11 +83,19 @@ class AuthorizationModel
             }
         }
     }
-    
+
+    /**
+     * @return ResponseWrapper
+     * @description metoda s³u¿y do wylogowywania z servisu
+     */
     public static function logOut(){
         return new ResponseWrapper(true, 'Logged out.');
     }
-    
+
+    /**
+     * @return bool
+     * @description metoda sprawdza czy sesja istnieje
+     */
     public static function checkSession(){
         $cookie = $_COOKIE[AuthorizationModel::$cookieName];
         if(strlen($cookie) != 0) return true;

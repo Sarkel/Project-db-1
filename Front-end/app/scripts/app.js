@@ -76,7 +76,7 @@ angular
 
     $rootScope.cookiesConfirmed = false;
 
-    $rootScope.url = appSettings.server;
+    $rootScope.url = 'App/';
 
     $rootScope.selectedToBorrow = [];
 
@@ -84,7 +84,8 @@ angular
 
     var init = function (){
       appSettings.getAppSettings().then(function (result){
-        $rootScope.appSettings = result.data;
+        console.log(result);
+        $rootScope.appSettings = result;
       },
       function (err){
         console.log(err);

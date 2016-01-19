@@ -9,26 +9,16 @@
  */
 angular.module('libraryApp')
   .service('Messages', ['$rootScope', '$http', function ($rootScope, $http) {
-    var url = $rootScope.url;
+    var url = 'App/api.php';
     this.send = function (message){
-    	return $http({
-    		url: url + '/messages',
-    		method: 'POST',
-    		data: message
-    	});
+    	return $http.post(url + '/messages', message);
     };
 
     this.getAll = function (){
-    	return $http({
-    		url: url + '/messages',
-    		method: 'GET'
-    	});
+    	return $http.get(url + '/messages');
     };
 
     this.getDetail = function (id) {
-    	return $http({
-    		url: url + '/messages/id/' + id,
-    		method: 'GET'
-    	});
+    	return $http.get(url + '/messages/id/' + id);
     };
   }]);

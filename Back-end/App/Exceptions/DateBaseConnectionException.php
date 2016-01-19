@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 25.12.2015
  * Time: 15:31
  */

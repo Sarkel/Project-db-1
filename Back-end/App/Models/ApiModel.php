@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 29.12.2015
  * Time: 23:08
  */

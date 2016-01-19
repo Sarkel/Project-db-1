@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 25.12.2015
  * Time: 22:25
  */
@@ -13,11 +13,22 @@ class DataBaseFieldsWrapper
     public $tableName;
     public $tableFields;
 
+    /**
+     * @param $tableName
+     * @param $tableFields
+     * @description konstruktor ustawia publiczne property klasy
+     *              wartoœci na podstawie parametrów wejœcoowych
+     */
     private function __construct($tableName, $tableFields){
         $this->tableName = $tableName;
         $this->tableFields = $tableFields;
     }
 
+    /**
+     * @param $tableAlias
+     * @return DataBaseFieldsWrapper
+     * @description zwraca tablicê pól dla wybranego aliasu tabeli
+     */
     public static function getDateBaseProperties($tableAlias){
         $tableName = DataBaseFieldsWrapper::$tables[$tableAlias];
         $tableFields = DataBaseFieldsWrapper::getTabelsFieldsNames()[$tableName];
@@ -25,6 +36,10 @@ class DataBaseFieldsWrapper
         return new DataBaseFieldsWrapper($tableName, $tableFields);
     }
 
+    /**
+     * @return array
+     * @description mapowanie wrapperów z odpowiadaj¹cymi im tabelami
+     */
     private static function getTabelsFieldsNames(){
         return [
             'Biblioteka.Adres' => DataBaseFieldsWrapper::$adres,

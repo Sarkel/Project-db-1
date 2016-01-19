@@ -9,44 +9,27 @@
  */
 angular.module('libraryApp')
   .service('Users',['$rootScope', '$http', function ($rootScope, $http) {
-    var url = $rootScope.url;
+    var url = 'App/api.php';
     this.login = function (credentials){
-    	return $http({
-    		urlL: url + '/login',
-    		method: 'POST',
-    		data: credentials
-    	});
+    	return $http.post(url + '/login', credentials);
     };
 
     this.logout = function (){
-    	return $http({
-    		urlL: url + '/logout',
-    		method: 'GET',
-    	});
+    	return $http.get(url + '/logout');
     };
 
     this.getUserDetails = function (id){
-    	return $http({
-    		urlL: url + '/users/id/' + id,
-    		method: 'GET'
-    	});
+    	return $http.get(url + '/users/id/' + id);
     };
 
     this.getAllUsers = function (){
-    	return $http({
-    		urlL: url + '/users',
-    		method: 'GET'
-    	});
+    	return $http.get(url + '/users');
     };
 
     this.updateUser = function (user, address){
-    	return $http({
-    		url: url + '/users/update',
-    		method: 'PUT',
-    		data: {
-    			user: user,
-    			address: address
-    		}
-    	});
+    	return $http.put(url + '/users/update', {
+                user: user,
+                address: address
+            });
     };
   }]);

@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 26.12.2015
  * Time: 13:19
  */
@@ -10,6 +10,11 @@
 namespace App\Wrappers;
 class WhereConditionWrapper
 {
+    /**
+     * @param $fieldAlias
+     * @param $fieldValue
+     * @description konstruktor klasy wrappuj¹cej parametry klauzuli where zapytania sql
+     */
     public function __construct($fieldAlias, $fieldValue)
     {
         $this->fieldValue = $fieldValue;
@@ -17,6 +22,9 @@ class WhereConditionWrapper
         $this->isSet = is_array($fieldValue);
     }
 
+    /**
+     * @return string
+     */
     public function getValuesString()
     {
         if ($this->isSet) {

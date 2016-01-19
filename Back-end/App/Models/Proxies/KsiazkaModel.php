@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 30.12.2015
  * Time: 23:39
  */
@@ -15,6 +15,9 @@ use App\Wrappers\WhereConditionWrapper;
 use Exception;
 class KsiazkaModel
 {
+    /**
+     * @return ResponseWrapper
+     */
     public static function getAllBooks(){
         try{
             $db = new DataBase();

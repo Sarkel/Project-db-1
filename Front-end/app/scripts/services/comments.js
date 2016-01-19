@@ -9,27 +9,17 @@
  */
 angular.module('libraryApp')
   .service('Comments', ['$rootScope', '$http', function ($rootScope, $http) {
-    var url = $rootScope.url;
+    var url = 'App/api.php';
 
     this.createComment = function (comment){
-    	return $http({
-    		url: url + '/comments',
-    		method: 'POST',
-    		data: comment
-    	});
+    	return $http.post(url + '/comments', comment);
     };
 
     this.getAllCommentsByBook = function (bookId) {
-    	return $http({
-    		url: url + '/comments/book/id/' + bookId,
-    		method: 'GET'
-    	});
+    	return $http.get(url + '/comments/book/id/' + bookId);
     };
 
     this.getAllCommentsByUser = function (userId) {
-    	return $http({
-    		url: url + '/comments/user/id/' + userId,
-    		method: 'GET'
-    	});
+    	return $http.get(url + '/comments/user/id/' + userId);
     };
   }]);

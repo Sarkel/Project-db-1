@@ -1,13 +1,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 29.12.2015
  * Time: 22:43
  */
 
-//require_once 'App/Vendor/autoloader.php';
 define('__ROOT__', dirname(dirname(__FILE__)));
+/**
+ * @param $className
+ * @description funkcja s³u¿¹ca do ³adowania odpowiednich klas
+ */
 function __autoload($className) {
     $ds = '\\';
     $file = __ROOT__ . $ds . str_replace('\\', $ds, $className) . '.php';

@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: sebas
+ * User: Sebastian Kubalski
  * Date: 21.12.2015
  * Time: 23:16
  */
@@ -28,6 +28,10 @@ class DataBase
     private $settings;
     private $db;
 
+    /**
+     * @throws CustomException
+     * @description konstruktor, rozpoczyna po³¹czenie z baz¹ danych oraz ustawia odpowiednie parametry po³¹czenia
+     */
     public function __construct()
     {
         try {
@@ -42,11 +46,18 @@ class DataBase
         }
     }
 
+    /**
+     * @description destruktor, koñczy po³¹czenie z baz¹ danych
+     */
     public function __destruct()
     {
         $this->db = null;
     }
 
+    /**
+     * @return PDO
+     * @description metoda tworzy nowy obiekt PDO reprezentuj¹cy po³¹czenie z baz¹ danych
+     */
     private function connect()
     {
         $dbName = $this->settings->dbName;
@@ -56,6 +67,13 @@ class DataBase
         return new PDO("pgsql:dbname=$dbName;host=$host", $dbUser, $dbPwd);
     }
 
+    /**
+     * @param $tableAlias
+     * @param $params
+     * @return bool
+     * @throws CustomException
+     * @description metoda odpowiada za dodawanie nowych wartoœci do bazy danych
+     */
     public function insert($tableAlias, $params)
     {
         if (!$this->isValidString($tableAlias) || !$this->isValidArray($params)) throw new CustomException('Invalid input params.');
@@ -86,6 +104,13 @@ class DataBase
         }
     }
 
+    /**
+     * @param $tableAlias
+     * @param null $whereConditions
+     * @return bool
+     * @throws CustomException
+     * @description metoda s³u¿y do usuwania recordów z bazy danych
+     */
     public function delete($tableAlias, $whereConditions = null)
     {
         if (!$this->isValidString($tableAlias)) throw new CustomException('Invalid input params.');
@@ -109,6 +134,14 @@ class DataBase
         }
     }
 
+    /**
+     * @param $tableAlias
+     * @param $setParams
+     * @param null $whereConditions
+     * @return bool
+     * @throws CustomException
+     * @description metoda s³u¿y do updatowania recordów w bazie danych
+     */
     public function update($tableAlias, $setParams, $whereConditions = null)
     {
         if(!$this->isValidString($tableAlias) || !$this->isValidArray($setParams)) throw new CustomException('Invalid input params.');
@@ -140,6 +173,15 @@ class DataBase
         }
     }
 
+    /**
+     * @param $tableAlias
+     * @param null $fields
+     * @param null $whereCondition
+     * @param null $otherOptions
+     * @return array
+     * @throws CustomException
+     * @description metoda wykonuje zapytanie SQL do bazy, jedynie dla pól z jednej tabeli
+     */
     public function select($tableAlias, $fields = null, $whereCondition = null, $otherOptions = null)
     {
         try {
@@ -175,6 +217,13 @@ class DataBase
         }
     }
 
+    /**
+     * @param $viewName
+     * @param $fields
+     * @return array
+     * @throws CustomException
+     * @description metoda s³u¿y do wykonywania zapytañ o widoki
+     */
     public function executeView($viewName, $fields){
         if(!$this->isValidArray($fields) || !$this->isValidString($viewName)) throw new CustomException('Invalid input params.');
         try {
@@ -194,6 +243,14 @@ class DataBase
         }
     }
 
+    /**
+     * @param $function
+     * @param $fields
+     * @param null $param
+     * @return array
+     * @throws CustomException
+     * @description metoda wykonuje procedury sk³adowane
+     */
     public function executeFunction($function, $fields, $param = null){
         if(!$this->isValidArray($fields) || !$this->isValidString($function)) throw new CustomException('Invalid input params.');
         try {
@@ -215,21 +272,43 @@ class DataBase
             throw new CustomException($e->getMessage(), $e->getCode(), $e);
         }
     }
+
+    /**
+     * @param $string
+     * @return bool
+     * @description walidacja stringów
+     */
     private function isValidString($string)
     {
         return $string != null && is_string($string);
     }
 
+    /**
+     * @param $array
+     * @return bool
+     * @description walidacja tabel
+     */
     private function isValidArray($array)
     {
         return $array != null && is_array($array) && count($array) != 0;
     }
 
+    /**
+     * @param $object
+     * @return bool
+     * @description walidacja obiektów
+     */
     private function isValidObject($object)
     {
         return $object != null && is_object($object);
     }
 
+    /**
+     * @param $whereConditions
+     * @param $tableFields
+     * @return mixed|string
+     * @description ustawanie odpowiedniej klauzuli WHERE dla podanego obiektu i pól
+     */
     private function setWhereCondition($whereConditions, $tableFields){
         $whereString = '';
         if ($this->isValidArray($whereConditions)) {
