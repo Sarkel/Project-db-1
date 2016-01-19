@@ -1,7 +1,10 @@
-<div>
-	<div ng-repeat="book in books" ng-click="selectBook(book.id)">
-		<div>{{book.tytul}}</div>
-		<div>{{book.stars}}</div>
+<div class="list-book-conteiner">
+	<div ng-repeat="book in books" ng-click="selectBook(book.id)" class="book">
 		<img ng-src="book.avatarUrl"/>
+		<div class="title">{{book.tytul}}</div>
+		<div class="stars">
+			<i class="fa fa-star fa-4x"></i>
+			<span>{{book.stars}}</span>
+		</div>
 	</div>
 </div>

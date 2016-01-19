@@ -16,9 +16,9 @@
     width: 100%;
     z-index: 1000;
     position: fixed;
-    bottom: 5vw;
+    bottom: 0;
     background-color: $white;
-    height: 4vw;
+    height: 4vh;
     & > .cookies-confirm{
         @include border-radius(30px);
         color: $grey;

@@ -1,7 +1,7 @@
-<div>
+<div class="user-list-container">
 	<input type="text" pleaceholder="Szukaj" ng-modal="searchResult" class="form-control" />
-	<div>
-		<div ng-repeat="user in users" ng-click="select(user.id)" ng-show="userType || user.typ === 'UZYTKOWNIK'">
+	<div class="user-list">
+		<div ng-repeat="user in users" ng-click="select(user.id)" ng-show="userType || user.typ === 'UZYTKOWNIK'" class="user-row">
 			<img ng-src="user.avatar"/>
 			<div>
 				<label>Imię: </label><span>{{user.imie}}</span>

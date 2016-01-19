@@ -1,0 +1,97 @@
+.detail-book-container, .detail-user-container {
+	margin-top: 10px;
+	.book-detail{
+		margin-top: 10px; 
+		display: -webkit-flex;
+	    display: flex;
+	    -webkit-flex-direction: row;
+	    flex-direction: row;
+		border: 1px solid #000;
+	    border-radius: 20px;
+	    -webkit-border-radius: 20px;
+	    padding: 10px;
+	    margin-bottom: 10px;
+	    -webkit-align-items: center;
+		align-items: center;
+		img {
+	    	width: 100px;
+    		height: 100px;
+    		position: relative;
+    		left: 10px;
+	    }
+	    .stars {
+	    	position: relative;
+    		left: 65%;
+    		span {
+    			color: #FFF;
+			    position: relative;
+			    top: -10px;
+			    right: 38px;
+			    font-size: 30px;
+    		}
+	    }
+	    .title {
+	    	position: relative;
+		    bottom: 20px;
+		    left: 14%;
+		    font-size: 20px;
+	    }
+	    .isbn {
+	    	position: relative;
+		    left: 5%;
+		    top: 22px;
+	    }
+	}
+
+	.colapsed-list {
+		margin-top: 15px;
+	    .content-row {
+	    	border-bottom: 1px solid #000;
+	    	display: -webkit-flex;
+		    display: flex;
+		    -webkit-flex-direction: row;
+		    flex-direction: row;
+		    margin: auto;
+		    padding: 10px;
+		    -webkit-align-items: center;
+			align-items: center;
+		    & > div {
+		    	padding-right: 40px;
+		    }
+		    &.comments{
+		    	display: -webkit-flex;
+			    display: flex;
+			    -webkit-flex-direction: col;
+			    flex-direction: col;
+		    }
+		    .btn {
+		    	margin-bottom: 15px;
+		    }
+	    }
+	    .content {
+	    	&.wyd{
+
+	    	}
+	    }
+	}	
+}
+
+.buttons-container {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+	.title {
+    	border: 1px solid #000;
+	    border-radius: 50%;
+	    -webkit-border-radius: 50%;
+	    width: 10%;
+	    height: 87px;
+	    margin: auto;
+	    text-align: center;
+	    span{
+	    	position: relative;
+			top: 31px;
+	    }
+    }
+}

@@ -12,6 +12,9 @@ $icon-font-path: "../bower_components/components-font-awesome/fonts/";
 @import "./custom_css/_nav.scss";
 @import "./custom_css/_logowanie.scss";
 @import "./custom_css/_contact_dialog.scss";
+@import "./custom_css/_detail_book.scss";
+@import "./custom_css/_basket.scss";
+@import "./custom_css/_detail_user.scss";
 //end custom css
 html, body { height: 100%; margin: 0; padding: 0; }
   #map { height: 100%; }

@@ -32,7 +32,7 @@ angular.module('libraryApp')
   			}
   		}, function (err) {
   			console.log(err);
-        $rootScope.errorDialog(err);
+        $rootScope.errorDialog('Coś poszło nie tak.');
   		});
       $rootScope.watchSearch($scope);
   	};

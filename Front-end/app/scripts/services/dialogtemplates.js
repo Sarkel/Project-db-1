@@ -80,11 +80,23 @@ angular.module('libraryApp')
     return editAdressDialogTemplate;
     };
 
+    var _addCommentDialog = function (){
+      var addCommentDialogTemplate = 
+      '<div>' +
+        '<textarea rows="4" ng-modal="content" maxlength="255" autofocus/>' +
+        '<input type="submit" value="Save" class="btn btn-default" ng-click="save()"/>' +
+        '<input type="button" value="Close" class="btn btn-default" ng-click="close()"/>' +
+      '</div>';
+
+      return addCommentDialogTemplate;
+    };
+
     // Public API here
     return {
       contactDialog: _contactDialog,
       mapDialog: _mapDialog,
       editUserDialog: _editUserDialog,
-      editAdresDialog: _editAdresDialog
+      editAdresDialog: _editAdresDialog,
+      addCommentDialog: _addCommentDialog
     };
   });

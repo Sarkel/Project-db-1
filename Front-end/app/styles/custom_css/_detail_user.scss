@@ -1,0 +1,49 @@
+.detail-user-container {
+	.user-details {
+		margin-top: 10px; 
+		display: -webkit-flex;
+	    display: flex;
+	    -webkit-flex-direction: row;
+	    flex-direction: row;
+		border: 1px solid #000;
+	    border-radius: 20px;
+	    -webkit-border-radius: 20px;
+	    padding: 10px;
+	    margin-bottom: 10px;
+	    -webkit-align-items: center;
+		align-items: center;
+		& > * {
+			flex: 1;
+			-webkit-flex: 1;
+		}
+		.image-container{
+			padding-right: 133px;
+			img {
+		    	width: 100px; 
+	    		height: 100px;
+		    }
+		}
+		
+	}
+}
+
+.user-list-container {
+	margin-top: 15px;
+	.user-list {
+		margin-top: 15px;
+		.user-row {
+			display: -webkit-flex;
+		    display: flex;
+		    -webkit-flex-direction: row;
+		    flex-direction: row;
+		    -webkit-align-items: center;
+			align-items: center;
+			border-bottom: 1px solid #000;
+			padding: 10px;
+			& > * {
+				flex: 1;
+				-webkit-flex: 1;
+			}
+		}
+	}
+}

@@ -1,42 +1,73 @@
-<div>
+<div class="detail-book-container">
 	<input type="Button" value="Wypożycz" ng-click="borrowBook(detailBook)" class="btn btn-default" ng-show="isLogged"/>
-	<div>
-		<img ng-src="detailBook.avatarUrl"/>
-		<label>Tytul: </label><span>{{detailBook.tytul}}</span>
-		<label>ISBN: </label><span>{{detailBook.isbn}}</span>
-		<span>{{detailBook.stars}}</span>
-	</div>
-	<div>
-		<span ng-click="!colapsedWyd">Wyd</span>
-		<div ng-show="colapsedWyd" ng-click="selectWyd(detailBook.book_wyd.id)">
-			<label>Nazwa: </label><span>{{detailBook.book_wyd.Nazwa}}</span>
-			<label>kraj: </label><span>{{detailBook.book_wyd.kraj}}</span>
+	<div class="book-detail">
+		<div class="image-container">
+			<img ng-src="detailBook.avatarUrl"/>
+		</div>
+		<div class="title">
+			<label>Tytul: </label><span>{{detailBook.tytul}}</span>
+		</div>
+		<div class="isbn">
+			<label>ISBN: </label><span>{{detailBook.isbn}}</span>
+		</div>
+		<div class="stars">
+			<i class="fa fa-star fa-4x"></i>
+			<span>{{detailBook.stars}}</span>
 		</div>
 	</div>
-	<div>
-		<span ng-click="!colapsedAuthors">author</span>
-		<div ng-show="colapsedAuthors">
-			<div ng-repeat="author in detailBook.authors" ng-click="selectAuthor(author.id)">
-				<label>Imie: </label><span>{{author.imie}}</span>
-				<label>nazwisko: </label><span>{{author.nazwisko}}</span>
-				<label>kraj: </label><span>{{author.kraj}}</span>
-				<label>powiazanie: </label><span>{{author.nazwaPowiazania}}</span>
+
+	<div class="buttons-container">
+		<div ng-click="colapsedWyd()" class="title">
+			<span>Wydawnictwo</span>
+		</div>
+		<div ng-click="colapsedAuthors()" class="title">
+			<span>Autorzy</span>
+		</div>
+		<div ng-click="showComments()" class="title">
+			<span>Komentarze</span>
+		</div>
+	</div>
+
+	<div class="colapsed-list">
+		<div ng-show="isColapsedWyd" ng-click="selectWyd(detailBook.book_wyd.id)" class="content wyd">
+			<div>
+				<label>Nazwa: </label><span>{{detailBook.book_wyd.Nazwa}}</span>
+			</div>
+			<div>
+				<label>Kraj: </label><span>{{detailBook.book_wyd.kraj}}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="colapsed-list">
+		<div ng-show="isColapsedAuthors" class="content">
+			<div ng-repeat="author in detailBook.authors" ng-click="selectAuthor(author.id)" class="content-row">
+				<div>
+					<label>Imie: </label><span>{{author.imie}}</span>
+				</div>
+				<div>
+					<label>nazwisko: </label><span>{{author.nazwisko}}</span>
+				</div>
+				<div>
+					<label>kraj: </label><span>{{author.kraj}}</span>
+				</div>
+				<div>
+					<label>powiazanie: </label><span>{{author.nazwaPowiazania}}</span>
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<!--comments-->
-	<div>
-		<div ng-click="!showComments">
-			<span>Komentarze</span>
-		</div>
-		<div ng-show="showComments">
+	<div class="colapsed-list">
+		<div ng-show="isShown" class="content">
+			<input value="Dodaj komentarz" type="button" ng-click="openAddCommentDialog()" class="btn btn-default" ng-show="isLogged"/>
 			<div ng-controller="CommentsCtrl">
-				<div ng-repeat="comment in comments">
-					<span>{{comment.user.imie}}</span>
-					<span>{{comment.user.nazwisko}}</span>
-					<span>{{comment.data}}</span>
-					<div>{{comment.tekst}}</div>
+				<div ng-repeat="comment in comments" class="content-row comments">
+					<div>{{comment.user.imie}}</div>
+					<div>{{comment.user.nazwisko}}</div>
+					<div>{{comment.data | date}}</div>
+					<textarea readonly cols="30" rows="4">{{comment.tekst}}</textarea>
 				</div>
 			</div>
 		</div>

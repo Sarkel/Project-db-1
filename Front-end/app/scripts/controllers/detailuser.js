@@ -29,7 +29,11 @@ angular.module('libraryApp')
         $scope.addresses = [];
     };
 
-    $scope.showComments = false;
+    $scope.isShown = false;
+    
+    $scope.showComments = function (){
+      $scope.isShown = !$scope.isShown;
+    };
 
     $scope.update = function (){
         Users.updateUser($scope.editUser, $scope.editAdres).then(function (result){
@@ -42,6 +46,7 @@ angular.module('libraryApp')
             }
         }, function (err){
             console.log(err);
+            $rootScope.errorDialog('Coś poszło nie tak.');
         });
     };
 
@@ -59,7 +64,7 @@ angular.module('libraryApp')
             }
         }, function (err){
             console.log(err);
-            $rootScope.errorDialog(err);
+            $rootScope.errorDialog('Coś poszło nie tak.');
         });
         console.log($scope.addresses);
     });
@@ -101,7 +106,7 @@ angular.module('libraryApp')
             }
         }, function (err){
             console.log(err);
-            $rootScope.errorDialog(err);
+            $rootScope.errorDialog('Coś poszło nie tak.');
         });
     };
     
@@ -121,7 +126,7 @@ angular.module('libraryApp')
     		}
     	}, function (err){
     		console.log(err);
-            $rootScope.errorDialog(err);
+            $rootScope.errorDialog('Coś poszło nie tak.');
     	});
         $rootScope.watchSearch($scope);
     };

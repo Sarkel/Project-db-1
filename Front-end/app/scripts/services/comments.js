@@ -8,7 +8,7 @@
  * Service in the libraryApp.
  */
 angular.module('libraryApp')
-  .service('Comments', ['$rootScope', '$http', '$q', function ($rootScope, $http, $q) {
+  .service('Comments', ['$rootScope', '$http', function ($rootScope, $http) {
     var url = $rootScope.url;
 
     this.createComment = function (comment){

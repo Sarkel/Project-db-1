@@ -35,7 +35,7 @@ angular.module('libraryApp')
             }
         }, function (err){
             console.log(err);
-            $rootScope.errorDialog(err);
+            $rootScope.errorDialog('Coś poszło nie tak.');
         });
     };
     var init = function(){

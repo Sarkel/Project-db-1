@@ -1,40 +1,65 @@
-<div>
+<div class="detail-user-container">
 	<input type="button" value="Wyloguj" ng-click="logout()" class="btn btn-default"/>
 	<input type="button" value="Edytuj" ng-click="openEditUserDialog()" class="btn btn-default"/>
 	<input type="button" value="Opcje administracyjne" ng-click="options(true)" class="btn btn-default" ng-show="isAdmin"/>
 	<input type="button" value="Opcje bibliotekarza" ng-click="options(false)" class="btn btn-default" ng-show="isLibrarian"/>
-	<div>
+	<div class="user-details">
 		<img ng-src="currectUser.avatar"/>
 		<div>
-			<label>E-mail: </label><span>{{currectUser.email}}</span>
-			<label>Nazwisko: </label><span>{{currectUser.nazwisko}}</span>
-			<label>Imie: </label><span>{{currectUser.imie}}</span>
-			<label>Telefon komórkowy: </label><span>{{currectUser.komorka}}</span>
-			<label>Telefon stacjonarny: </label><span>{{currectUser.stacjonarny}}</span>
-			<label>Opłaty: </label><span>{{currectUser.debet | currency : ""}} PLN</span>
+			<div>
+				<label>E-mail: </label><span>{{currectUser.email}}</span>
+			</div>
+			<div>
+				<label>Nazwisko: </label><span>{{currectUser.nazwisko}}</span>
+			</div>
+			<div>
+				<label>Imie: </label><span>{{currectUser.imie}}</span>
+			</div>
+			<div>
+				<label>Telefon komórkowy: </label><span>{{currectUser.komorka}}</span>
+			</div>
+			<div>
+				<label>Telefon stacjonarny: </label><span>{{currectUser.stacjonarny}}</span>
+			</div>
+			<div>
+				<label>Opłaty: </label><span>{{currectUser.debet | currency : ""}} PLN</span>
+			</div>
 		</div>
 		<div>
-			<label>Ulica: </label><span>{{currectUser.ulica}}</span>
-			<label>Numer domu: </label><span>{{currectUser.numerDomu}}</span>
-			<label>Numer mieszkania: </label><span>{{currectUser.numerMieszkania}}</span>
-			<label>Kod pocztowy: </label><span>{{currectUser.kodPocztowy}}</span>
-			<label>Miejscowosc: </label><span>{{currectUser.miejscowosc}}</span>
-			<label>Kraj: </label><span>{{currectUser.kraj}}</span>
+			<div>
+				<label>Ulica: </label><span>{{currectUser.ulica}}</span>
+			</div>
+			<div>
+				<label>Numer domu: </label><span>{{currectUser.numerDomu}}</span>
+			</div>
+			<div>
+				<label>Numer mieszkania: </label><span>{{currectUser.numerMieszkania}}</span>
+			</div>
+			<div>
+				<label>Kod pocztowy: </label><span>{{currectUser.kodPocztowy}}</span>
+			</div>
+			<div>
+				<label>Miejscowosc: </label><span>{{currectUser.miejscowosc}}</span>
+			</div>
+			<div>
+				<label>Kraj: </label><span>{{currectUser.kraj}}</span>
+			</div>
 		</div>
 	</div>
 
 	<!--comments-->
-	<div>
-		<div ng-click="!showComments">
+	<div class="buttons-container">
+		<div ng-click="showComments()" class="title">
 			<span>Komentarze</span>
 		</div>
-		<div ng-show="showComments">
-			<div ng-controller="CommentsCtrl">
-				<div ng-repeat="comment in comments" ng-click="selectBook(comment.book.id)">
-					<span>{{comment.book.tytul}}</span>
-					<span>{{comment.data}}</span>
-					<div>{{comment.tekst}}</div>
-				</div>
+	</div>
+
+	<div ng-show="isShown" class="colapsed-list">
+		<div ng-controller="CommentsCtrl">
+			<div ng-repeat="comment in comments" ng-click="selectBook(comment.book.id)" class="content-row comments">
+				<span>{{comment.book.tytul}}</span>
+				<span>{{comment.data | date}}</span>
+				<textarea readonly cols="30" rows="4">{{comment.tekst}}</textarea>
 			</div>
 		</div>
 	</div>

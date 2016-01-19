@@ -1,5 +1,4 @@
 to do:
-tworzenie komentarzy
 wyswietlanie wiadomosci w dwoch przypadkach
 wysylanie wiadomosci
 

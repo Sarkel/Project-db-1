@@ -67,6 +67,7 @@ angular
       });
   })
   .run(['$rootScope', 'appSettings', 'ngDialog', '$location', 'dialogTemplates', 'Books', function ($rootScope, appSettings, ngDialog, $location, dialogTemplates, Books){
+
     $rootScope.isAdmin = false;
     
     $rootScope.isLibrarian = false;
@@ -75,11 +76,12 @@ angular
 
     $rootScope.cookiesConfirmed = false;
 
-    $rootScope.url = 'app.php';
+    $rootScope.url = appSettings.server;
 
     $rootScope.selectedToBorrow = [];
 
     $rootScope.user = {};
+
     var init = function (){
       appSettings.getAppSettings().then(function (result){
         $rootScope.appSettings = result.data;
@@ -130,6 +132,14 @@ angular
         template: '<div class="alert alert-danger">' + msg + '</div><input type="button" value="Zamknij" class="btn btn-danger" ng-click="close()"/>',
         controller: 'ErrorCtrl',
         event: 'errorEvent'
+      });
+    };
+
+    $rootScope.openAddCommentDialog = function (){
+      dialog({
+        template: dialogTemplates.addCommentDialog(),
+        controller: 'CommentsCtrl',
+        event: 'addComment'
       });
     };
 

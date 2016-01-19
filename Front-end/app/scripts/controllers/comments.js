@@ -8,12 +8,44 @@
  * Controller of the libraryApp
  */
 angular.module('libraryApp')
-  .controller('CommentsCtrl', ['$rootScope', '$scope', 'Comments', '$location', '$routeParams',  function ($rootScope, $scope, Comments, $location, $routeParams) {
+  .controller('CommentsCtrl', ['$rootScope', '$scope', 'Comments', '$location', '$routeParams', 'ngDialog',  function ($rootScope, $scope, Comments, $location, $routeParams, ngDialog) {
     $scope.selectBook = function (bookId){
     	$location.path('/books/' + bookId);
     };
 
+    var listener = $scope.$on('addComment', function (event, result) {
+        $scope.dialogId = result.dialogId;
+    });
+
+    $scope.$on('$destroy', listener);
+
     $scope.comments = [];
+
+    $scope.content = '';
+
+    $scope.save = function (){
+        Comments.createComment({
+            userId: $rootScope.user.id,
+            date: Date.now(),
+            text: $scope.content,
+            bookId: $routeParams.id
+        }).then(function (result){
+            if(result.success){
+                $scope.content = '';
+                $scope.close($scope.dialogId);
+            } else {
+                console.log(result.msg);
+                $rootScope.errorDialog('Coś poszło nie tak.');
+            }
+        }, function (err){
+            console.log(err);
+            $rootScope.errorDialog('Coś poszło nie tak.');
+        });
+    };
+
+    $scope.close = function (){
+        ngDialog.close($scope.dialogId);
+    };
 
     var init = function (){
     	var res = null;
@@ -30,10 +62,13 @@ angular.module('libraryApp')
     			$scope.comments = result.data;
     		} else {
     			console.log(result.msg);
+                $rootScope.errorDialog('Coś poszło nie tak.');
     		}
     	}, function (err){
     		console.log(err);
+            $rootScope.errorDialog('Coś poszło nie tak.');
     	});
+
     };
 
     init();
