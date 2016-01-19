@@ -82,4 +82,15 @@ class KsiazkaModel
             return new ResponseWrapper(false, $e->getMessage());
         }
     }
+
+    public static function borrowBook($details){
+        try{
+            $bodyParams = $details['BodyParams'][0];
+            $db = new DataBase();
+            $response = $db->insert('$wypozyczonaKsiazka', $bodyParams);
+            return new ResponseWrapper($response);
+        } catch(Exception $e){
+            return new ResponseWrapper(false, $e->getMessage());
+        }
+    }
 }

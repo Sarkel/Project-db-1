@@ -79,5 +79,41 @@
     "httpMethod": "GET",
     "endpoint": "/users",
     "description": "Get all users."
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "KsiazkaModel",
+    "method": "borrowBook",
+    "hasParams": true,
+    "httpMethod": "POST",
+    "endpoint": "/books/borrow",
+    "description": "Borrow book"
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "UzytkownikModel",
+    "method": "getUserDetail",
+    "hasParams": true,
+    "httpMethod": "GET",
+    "endpoint": "/users/id/{id}",
+    "description": "Get selected user."
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "KomentarzModel",
+    "method": "getAllCommentsByBook",
+    "hasParams": true,
+    "httpMethod": "GET",
+    "endpoint": "/comments/book/id/{id}",
+    "description": "Get comments by book."
+  },
+  {
+    "namespace": "App\\Models\\Proxies",
+    "class": "KomentarzModel",
+    "method": "getAllCommentsByUser",
+    "hasParams": true,
+    "httpMethod": "GET",
+    "endpoint": "/comments/user/id/{id}",
+    "description": "Get comments by user."
   }
 ]

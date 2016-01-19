@@ -19,7 +19,7 @@ angular.module('libraryApp')
 
     this.getSelected = function (id) {
     	return $http({
-    		urlL: url + '/books/' + id,
+    		urlL: url + '/books/id/' + id,
     		method: 'GET'
     	});
     };
@@ -32,12 +32,15 @@ angular.module('libraryApp')
     };
 
     this.borrowBooks = function (userId, booksId){
+      var today = new Date(Date.now()).toUTCString();
       return $http({
         url: url + '/books/borrow',
         method: 'POST',
         data: {
-          user: userId,
-          books: booksId
+          uzytkownik: userId,
+          ksiazka: booksId,
+          dataWypozyczenia: today,
+          dataOddania: ''
         }
       });
     };

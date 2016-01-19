@@ -25,10 +25,10 @@ angular.module('libraryApp')
 
     $scope.save = function (){
         Comments.createComment({
-            userId: $rootScope.user.id,
-            date: Date.now(),
-            text: $scope.content,
-            bookId: $routeParams.id
+            uzytkownik: $rootScope.user.id,
+            data: Date.now(),
+            tekst: $scope.content,
+            ksiazka: $routeParams.id
         }).then(function (result){
             if(result.success){
                 $scope.content = '';

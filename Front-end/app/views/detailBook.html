@@ -64,8 +64,8 @@
 			<input value="Dodaj komentarz" type="button" ng-click="openAddCommentDialog()" class="btn btn-default" ng-show="isLogged"/>
 			<div ng-controller="CommentsCtrl">
 				<div ng-repeat="comment in comments" class="content-row comments">
-					<div>{{comment.user.imie}}</div>
-					<div>{{comment.user.nazwisko}}</div>
+					<div>{{comment.imie}}</div>
+					<div>{{comment.nazwisko}}</div>
 					<div>{{comment.data | date}}</div>
 					<textarea readonly cols="30" rows="4">{{comment.tekst}}</textarea>
 				</div>

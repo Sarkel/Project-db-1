@@ -77,7 +77,7 @@ CREATE OR REPLACE FUNCTION Biblioteka.books_by_wydawnictwo(INT) RETURNS TABLE(f1
 
 --get all comments on selected book
 CREATE OR REPLACE FUNCTION Biblioteka.comments_by_book(INT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT,f4 TEXT, f5 TEXT, f6 TIMESTAMP, f7 INT, f8 TEXT) AS '
-	SELECT kom.Komentarz_ID, u.Imie, u.Nazwisko, k.Tytul, kom.Tekst, kom.Data, kom.Ilosc_gwiazdek, av.Url 
+	SELECT kom.Komentarz_ID, u.Imie, u.Nazwisko, kom.Tekst, kom.Data 
 	FROM Biblioteka.Komentarz AS kom, Biblioteka.Ksiazka AS k, Biblioteka.Uzytkownik AS u, Biblioteka.Avatar AS av 
 	WHERE k.Ksiazka_ID = $1 
 		AND k.Ksiazka_ID = kom.Ksiazka 
@@ -88,7 +88,7 @@ CREATE OR REPLACE FUNCTION Biblioteka.comments_by_book(INT) RETURNS TABLE(f1 INT
 
 --get all comments by selected user
 CREATE OR REPLACE FUNCTION Biblioteka.comments_by_user(INT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT, f4 TIMESTAMP, f5 INT) AS '
-	SELECT kom.Komentarz_ID, k.Tytul, kom.Tekst, kom.Data, kom.Ilosc_gwiazdek  
+	SELECT kom.Komentarz_ID, k.Tytul, kom.Tekst, kom.Data  
 	FROM Biblioteka.Komentarz AS kom, Biblioteka.Ksiazka AS k, Biblioteka.Uzytkownik AS u 
 	WHERE u.Uzytkownik_ID = $1 
 		AND k.Ksiazka_ID = kom.Ksiazka 

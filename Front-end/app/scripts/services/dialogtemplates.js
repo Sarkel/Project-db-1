@@ -48,7 +48,7 @@ angular.module('libraryApp')
         '<input type="text" class="form-control" ng-model="editAdres.ulica" placeholder="Ulica"/>' +
     '<input type="text" class="form-control" ng-model="editAdres.numerDomu" placeholder="Numer domu"/>' +
     '<input type="text" class="form-control" ng-model="editAdres.numerMieszkania" placeholder="Numer mieszkania"/>' +
-    '<input type="button" class="btn btn-default" value="Edytuj adres" ng-click="openEditAdresDialog()"/>' +
+    '<input type="button" class="btn btn-default" value="Edytuj adres" ng-click="openEditAdresDialog()" ng-hide="true"/>' +
     '</div>' +
     '<input type="button" value="Update" ng-click="update()" class="btn btn-default"/>' +
     '<input type="button" value="Zamknij" ng-click="close(userDialogId)" class="btn btn-default" />';

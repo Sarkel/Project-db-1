@@ -27,7 +27,7 @@ angular.module('libraryApp')
 
     this.getUserDetails = function (id){
     	return $http({
-    		urlL: url + '/users/' + id,
+    		urlL: url + '/users/id/' + id,
     		method: 'GET'
     	});
     };

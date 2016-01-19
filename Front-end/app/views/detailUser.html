@@ -57,7 +57,7 @@
 	<div ng-show="isShown" class="colapsed-list">
 		<div ng-controller="CommentsCtrl">
 			<div ng-repeat="comment in comments" ng-click="selectBook(comment.book.id)" class="content-row comments">
-				<span>{{comment.book.tytul}}</span>
+				<span>{{comment.tytul}}</span>
 				<span>{{comment.data | date}}</span>
 				<textarea readonly cols="30" rows="4">{{comment.tekst}}</textarea>
 			</div>
