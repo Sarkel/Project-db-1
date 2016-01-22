@@ -98,8 +98,8 @@ CREATE OR REPLACE FUNCTION Biblioteka.comments_by_user(INT) RETURNS TABLE(f1 INT
 
 --get user detail information
 CREATE OR REPLACE FUNCTION Biblioteka.user_detail(INT) RETURNS TABLE(f1 INT, f2 TEXT, f3 TEXT, f4 TEXT, f5 TEXT, f6 TEXT, f7 INT, f8 INT, f9 TEXT, f10 TEXT, f11 TEXT, f12 TEXT, f13 TEXT, f14 TEXT, f15 BOOLEAN, f16 NUMERIC) AS '
-	SELECT u.Uzytkownik_ID, u.Email, u.Nazwisko, u.Imie, av.Url, ad.Ulica, ad.Numer_domu, ad.Numer_mieszkania, p.Kod_pocztowy, p.Miejscowosc, p.Kraj, 
-		ty.Nazwa, u.Telefon_komorkowy, u.Telefon_stacjonarny, u.Aktywny, Biblioteka.get_debet() 
+	SELECT u.Uzytkownik_ID AS id, u.Email AS email, u.Nazwisko AS nazwisko, u.Imie AS imie, av.Url AS url, ad.Ulica AS ulica, ad.Numer_domu AS numerDomu, ad.Numer_mieszkania AS numerMieszkania, p.Kod_pocztowy AS kodPocztowy, p.Miejscowosc AS miejscowosc, p.Kraj AS Kraj, 
+		ty.Nazwa AS Typ, u.Telefon_komorkowy AS komorka, u.Telefon_stacjonarny AS stacjonarny, u.Aktywny AS aktywny, Biblioteka.get_debet() AS star 
 	FROM Biblioteka.Uzytkownik AS u, Biblioteka.Avatar AS av, Biblioteka.Adres AS ad, Biblioteka.Poczta AS p, Biblioteka.Rodzaj_uzytkownika AS ty 
 	WHERE u.Uzytkownik_ID = $1 
 		AND u.Typ = ty.Rodzaj_uzytkownika_ID 

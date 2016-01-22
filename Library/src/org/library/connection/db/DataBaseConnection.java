@@ -3,12 +3,10 @@ package org.library.connection.db;
 import org.library.exceptions.ConnectionException;
 import org.library.exceptions.CustomException;
 import org.library.exceptions.DMLException;
+import org.library.wrappers.DataBaseWrappers;
 import org.library.wrappers.TableFieldWrapper;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -93,6 +91,19 @@ public class DataBaseConnection {
             System.out.println(e.getMessage());
             throw new DMLException(e.getMessage());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new CustomException(e.getMessage());
+        }
+    }
+
+    public ResultSet select(String query) throws Exception{
+        try{
+            Statement st = this.con.createStatement();
+            return st.executeQuery(query);
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+            throw new CustomException(e.getMessage());
+        } catch (Exception e){
             System.out.println(e.getMessage());
             throw new CustomException(e.getMessage());
         }
